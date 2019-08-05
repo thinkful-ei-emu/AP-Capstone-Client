@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "alias": "adp8ke-dog-parks-app",
+    "name": "dog-parks-app",
+    "routes": [
+        {
+          "src": "^/static/(.*)",
+          "dest": "/static/$1"
+        },
+        {
+          "src": ".*",
+          "dest": "/index.html"
+        }
+    ]
+  }

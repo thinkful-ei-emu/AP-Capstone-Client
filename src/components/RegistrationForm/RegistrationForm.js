@@ -1,34 +1,64 @@
-import React from 'react'
+import React from "react";
+import AuthApiService from "../../services/auth-api-service";
 
+export default class RegistrationForm extends React.Component {
+  state = {
+    error: null
+  };
 
-export default class RegistrationForm extends React.Component{
+  handleSubmit = e => {
+    e.preventDefault();
 
-    handleSubmit = () =>{
+    const { full_name, user_name, password } = e.target;
 
-    }
+    this.setState({
+      error: null
+    });
 
-    render(){
-        return(
-            <form>
-                <div>
-                    <label>Full Name</label>
-                    <input name="full_name" type="text" required/>
-                </div>
+    AuthApiService.postUser({
+      user_name: user_name.value,
+      password: password.value,
+      full_name: full_name.value
+    })
+      .then(user => {
+        user_name.value = "";
+        password.value = "";
+        full_name.value = "";
+        this.props.onRegistrationSuccess();
+      })
+      .catch(res => {
+        this.setState({
+          error: res.error
+        });
+      });
+  };
 
-                <div>
-                    <label>Username</label>
-                    <input name="user_name" type="text" required/>
-                </div>
+  render() {
+    const { error } = this.state;
 
-                <div>
-                    <label>Password</label>
-                    <input name="password" type="text" required/>
-                </div>
-                
-                <div>
-                    <button type="submit">Register</button>
-                </div>
-            </form>
-        )
-    }
+    return (
+      <form className='registration-form' onSubmit={this.handleSubmit}>
+        <div role="alert">{error && <p className="red">{error}</p>}</div>
+
+        <div className='full_name'>
+          <label htmlFor='registration-form-full_name'>Full Name</label>
+          <input name="full_name" type="text" required />
+        </div>
+
+        <div>
+          <label htmlFor='registration-form-user_name'>Username</label>
+          <input name="user_name" type="text" required />
+        </div>
+
+        <div>
+          <label htmlFor='registration-form-password'>Password</label>
+          <input name="password" type="text" required />
+        </div>
+
+        <div>
+          <button type="submit">Register</button>
+        </div>
+      </form>
+    );
+  }
 }
