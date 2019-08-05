@@ -2,7 +2,11 @@ import React from "react";
 
 export default class Park extends React.Component {
 
-  handleSubmit = () => {};
+  handleRatingSubmit = () => {};
+
+  handleAddToFavorites = () => {
+
+  }
 
   render() {
     return (
@@ -29,7 +33,13 @@ export default class Park extends React.Component {
             <div>
               <button type="submit">Add Rating</button>
             </div>
+            
           </form>
+
+          <div>
+              <button type="button">Add To Favorites</button>
+            </div>
+
         </div>
       </div>
     );
