@@ -43,7 +43,7 @@ export default class Header extends React.Component {
         <h1>
           <Link to="/">Release Me Human!</Link>
         </h1>
-        {this.renderLogoutLink()}
+        {this.renderLoginLink()}
       </nav>
     );
   }

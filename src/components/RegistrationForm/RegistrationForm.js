@@ -52,7 +52,7 @@ export default class RegistrationForm extends React.Component {
 
         <div>
           <label htmlFor='registration-form-password'>Password</label>
-          <input name="password" type="text" required />
+          <input name="password" type="password" required />
         </div>
 
         <div>
