@@ -2,37 +2,37 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default class Header extends React.Component {
-  handleLogoutClick = () => {};
+  handleLogoutClick = () => {
+  };
 
   renderLogoutLink() {
     return (
       <div>
-        <Link 
-            to="/" 
-            onClick={this.handleLogoutClick}
-        >
+        <div>
+          <Link to="/favorites">Favorites</Link>
+        </div>
+
+        <div>
+          <Link to="/" onClick={this.handleLogoutClick}>
             Logout
-        </Link>
+          </Link>
+        </div>
       </div>
     );
   }
 
   renderLoginLink() {
-      return(
-          <div>
-              <Link
-                to="/register"
-              >
-                Register
-              </Link>
+    return (
+      <div>
+        <div>
+          <Link to="/register">Register</Link>
+        </div>
 
-              <Link
-                to="/Login"
-              >
-                Login
-              </Link>
-          </div>
-      )
+        <div>
+          <Link to="/Login">Login</Link>
+        </div>
+      </div>
+    );
   }
 
   render() {
@@ -41,7 +41,7 @@ export default class Header extends React.Component {
         <h1>
           <Link to="/">Release Me Human!</Link>
         </h1>
-        {/* renders working, will need ternery when adding jwt */}
+        {this.renderLogoutLink()}
       </nav>
     );
   }

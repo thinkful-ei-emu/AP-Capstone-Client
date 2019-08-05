@@ -7,6 +7,7 @@ import LoginPage from '../../routes/LoginPage/LoginPage'
 import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import ParkPage from '../../routes/ParkPage/ParkPage'
 import ParkListPage from '../../routes/ParkListPage/ParkListPage'
+import FavoritesPage from '../../routes/FavoritesPage/FavoritesPage'
 
 class App extends React.Component{
 
@@ -24,6 +25,7 @@ class App extends React.Component{
             <Route path ={'/register'} component={RegistrationPage}/>
             <Route exact path ={'/parks'} component={ParkListPage}/>
             <Route path={'/parks/:parkId'} component={ParkPage}/>
+            <Route path={'/favorites'} component={FavoritesPage}/>
           </Switch>
         </main>
 

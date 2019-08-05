@@ -15,7 +15,7 @@ export default class RegistrationPage extends React.Component{
     render(){
         return(
             <div>
-                <p>Registration Page</p>
+                <h2>Registration Page</h2>
                 <RegistrationForm onRegistrationSuccess = {this.handleRegistrationSuccess}/>
             </div>
         )

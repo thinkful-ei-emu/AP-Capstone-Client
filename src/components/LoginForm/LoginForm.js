@@ -11,7 +11,7 @@ export default class LoginForm extends React.Component{
 
         return(
             <div>
-                <form>
+                <form className="LoginForm">
                     <div>
                         <label>Username</label>
                         <input name="user_name" id="LoginForm-user_name" required/>
@@ -20,6 +20,10 @@ export default class LoginForm extends React.Component{
                     <div>
                         <label>Password</label>
                         <input name="password" id="LoginForm-password" required/>
+                    </div>
+
+                    <div>
+                        <button type="submit">Login</button>
                     </div>
                     
                 </form>
