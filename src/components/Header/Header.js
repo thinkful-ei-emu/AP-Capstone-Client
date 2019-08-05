@@ -1,13 +1,22 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import TokenService from '../../services/token-service'
 
 export default class Header extends React.Component {
- 
-  handleLogoutClick = () => {
 
+  state = {
+    loggedIn: null
+  }
+  
+  handleLogoutClick = () => {
+    TokenService.clearAuthToken()
+    this.setState({
+      loggedIn: false
+    })
   };
 
   renderLogoutLink() {
+    
     return (
       <div>
         <div>
@@ -43,7 +52,9 @@ export default class Header extends React.Component {
         <h1>
           <Link to="/">Release Me Human!</Link>
         </h1>
-        {this.renderLoginLink()}
+        {TokenService.hasAuthToken()
+        ? this.renderLogoutLink()
+        : this.renderLoginLink()}
       </nav>
     );
   }

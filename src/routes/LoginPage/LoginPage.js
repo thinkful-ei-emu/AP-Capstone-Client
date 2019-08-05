@@ -5,16 +5,19 @@ import LoginForm from '../../components/LoginForm/LoginForm'
 
 export default class LoginPage extends React.Component{
     
-    handleLoginSuccess(){
+    handleLoginSuccess = () => {
+        const {location, history} = this.props
 
+        const destination = (location.state || {}).from || '/'
+
+        history.push(destination)
     }
 
     render(){
         return(
             <div>
                <h2>Login</h2> 
-               <LoginForm/>
-               {/* Pass down handleLoginSuccess */}
+               <LoginForm onLoginSuccess={this.handleLoginSuccess}/>
             </div>
         )
     }

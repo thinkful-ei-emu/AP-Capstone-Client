@@ -8,24 +8,26 @@ import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import ParkPage from '../../routes/ParkPage/ParkPage'
 import ParkListPage from '../../routes/ParkListPage/ParkListPage'
 import FavoritesPage from '../../routes/FavoritesPage/FavoritesPage'
+import PrivateRoute from '../Utils/PrivateRoute'
+import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
+
 
 class App extends React.Component{
-
 
   render(){
     return(
       <div className="App">
         <header>
-          <Header />
+          <Header/>
         </header>
         <main>
           <Switch>
             <Route exact path ={'/'} component={LandingPage}/>
-            <Route exact path={'/login'} component={LoginPage}/>
-            <Route path ={'/register'} component={RegistrationPage}/>
-            <Route exact path ={'/parks'} component={ParkListPage}/>
-            <Route path={'/parks/:parkId'} component={ParkPage}/>
-            <Route path={'/favorites'} component={FavoritesPage}/>
+            <PublicOnlyRoute exact path={'/login'} component={LoginPage}/>
+            <PublicOnlyRoute path ={'/register'} component={RegistrationPage}/>
+            <PublicOnlyRoute exact path ={'/parks'} component={ParkListPage}/>
+            <PublicOnlyRoute path={'/parks/:parkId'} component={ParkPage}/>
+            <PrivateRoute path={'/favorites'} component={FavoritesPage}/>
           </Switch>
         </main>
 
