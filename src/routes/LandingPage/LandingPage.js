@@ -9,7 +9,7 @@ export default class LandingPage extends React.Component{
         return(
             <div>
                 <p>Landing Page</p>
-                <SearchForm/>
+                <SearchForm setSearch={this.props.setSearch} state={this.props.state} handleSearchSubmit={this.props.handleSearchSubmit} {...this.props}/>
             </div>
         )
     }

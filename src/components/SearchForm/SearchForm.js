@@ -2,20 +2,18 @@ import React from 'react'
 
 export default class SearchForm extends React.Component{
 
-    handleSubmit = () =>{}
 
-    //for button might need onClick={()=> history.push('/parks')}
 
     render(){
         return(
-            <form>
+            <form onSubmit={this.props.handleSearchSubmit}>
                 <div>
-                <input type="text"  placeholder="Virginia Beach" required/>
+                <input type="text"  placeholder="Virginia Beach" value={this.props.state.search} onChange={e=>this.props.setSearch(e.target.value)} required/>
                 </div>
 
                 <div>
                     
-                    <button type="submit">Search by City</button>
+                    <button type="submit" >Search by City</button>
     
                 </div>
             </form>

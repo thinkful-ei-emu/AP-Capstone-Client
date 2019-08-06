@@ -12,11 +12,11 @@ export default class Park extends React.Component {
     return (
       <div>
         <div>
-          <p>Park.image maybe</p>
-          <p>Park.title</p>
-          <p>Park.address</p>
-          <p>Park.hours</p>
-          <p>Average Rating</p>
+          <h3>{this.props.park_name}</h3>
+          <p>{this.props.park_address}</p>
+          <p>{this.props.park_city}</p>
+          <p>{this.props.park_hours}</p>
+          <p>{this.props.park_rating}</p>
         </div>
 
         <div>
