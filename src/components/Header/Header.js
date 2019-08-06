@@ -1,49 +1,37 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import TokenService from '../../services/token-service'
 
 export default class Header extends React.Component {
 
-  state = {
-    loggedIn: null
-  }
+  handleIfLoggedIn = () => {
+    if(this.props.state.loggedIn === true){
+      return (
+        <div>
+          <div>
+            <Link to="/favorites">Favorites</Link>
+          </div>
   
-  handleLogoutClick = () => {
-    TokenService.clearAuthToken()
-    this.setState({
-      loggedIn: false
-    })
-  };
-
-  renderLogoutLink() {
-    
-    return (
-      <div>
-        <div>
-          <Link to="/favorites">Favorites</Link>
+          <div>
+            <Link to="/" onClick={this.props.handleLogoutClick}>
+              Logout
+            </Link>
+          </div>
         </div>
-
+      ); 
+    }
+    else{
+      return (
         <div>
-          <Link to="/" onClick={this.handleLogoutClick}>
-            Logout
-          </Link>
+          <div>
+            <Link to="/register">Register</Link>
+          </div>
+  
+          <div>
+            <Link to="/Login">Login</Link>
+          </div>
         </div>
-      </div>
-    );
-  }
-
-  renderLoginLink() {
-    return (
-      <div>
-        <div>
-          <Link to="/register">Register</Link>
-        </div>
-
-        <div>
-          <Link to="/Login">Login</Link>
-        </div>
-      </div>
-    );
+      );
+    }
   }
 
   render() {
@@ -52,9 +40,7 @@ export default class Header extends React.Component {
         <h1>
           <Link to="/">Release Me Human!</Link>
         </h1>
-        {TokenService.hasAuthToken()
-        ? this.renderLogoutLink()
-        : this.renderLoginLink()}
+        {this.handleIfLoggedIn()}
       </nav>
     );
   }

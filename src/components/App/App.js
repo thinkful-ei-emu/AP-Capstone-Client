@@ -10,20 +10,47 @@ import ParkListPage from '../../routes/ParkListPage/ParkListPage'
 import FavoritesPage from '../../routes/FavoritesPage/FavoritesPage'
 import PrivateRoute from '../Utils/PrivateRoute'
 import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
+import TokenService from '../../services/token-service'
 
 
 class App extends React.Component{
+
+  state = {
+    loggedIn: null
+  }
+
+  handleLoginSuccess = () => {
+
+    // const {location, history} = this.props
+
+    // const destination = (location.state || {}).from || '/'
+
+    // history.push(destination)
+
+     this.setState({
+      loggedIn: true
+    })
+
+    
+}
+
+handleLogoutClick = () => {
+  TokenService.clearAuthToken()
+  this.setState({
+    loggedIn: false
+  })
+};
 
   render(){
     return(
       <div className="App">
         <header>
-          <Header/>
+          <Header state = {this.state} handleLogoutClick={this.handleLogoutClick}/>
         </header>
         <main>
           <Switch>
             <Route exact path ={'/'} component={LandingPage}/>
-            <PublicOnlyRoute exact path={'/login'} component={LoginPage}/>
+            <Route path={'/login'} render = {props => <LoginPage onLoginSuccess = {this.handleLoginSuccess}/>}/>
             <PublicOnlyRoute path ={'/register'} component={RegistrationPage}/>
             <PublicOnlyRoute exact path ={'/parks'} component={ParkListPage}/>
             <PublicOnlyRoute path={'/parks/:parkId'} component={ParkPage}/>

@@ -5,11 +5,6 @@ import TokenService from '../../services/token-service';
 
 export default class LoginForm extends React.Component{
 
-    state = {
-        error: null,
-    }
-
-
     handleSubmitJwtAuth = e =>{
 
         e.preventDefault()
