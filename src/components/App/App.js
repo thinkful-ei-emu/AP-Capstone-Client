@@ -61,9 +61,11 @@ class App extends React.Component{
 
   handleLoginSuccess = () => {
 
-     this.setState({
+    this.setState({
       loggedIn: true
     })
+
+    this.props.history.goBack()
     
 }
 
