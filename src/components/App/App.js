@@ -11,6 +11,7 @@ import FavoritesPage from '../../routes/FavoritesPage/FavoritesPage'
 import TokenService from '../../services/token-service'
 import config from '../../config'
 import ParksContext from '../../context/ParksContext'
+import {withRouter} from 'react-router'
 
 
 class App extends React.Component{
@@ -39,7 +40,8 @@ class App extends React.Component{
             console.log(data)
             this.setState({
                 parks: data,
-            }
+            },
+            ()=>this.props.history.push('parks')
             )
             console.log(this.state.parks)
   
@@ -47,6 +49,14 @@ class App extends React.Component{
         .catch(err=>{
             console.error(err)
         })
+        .then(()=>{
+          this.setState({
+            search: ''
+          })
+        })
+        .catch(err=>{
+          console.error(err)
+      })
 }
 
   handleLoginSuccess = () => {
@@ -104,4 +114,4 @@ setSearch = search => {
   }
 }
 
-export default App;
+export default withRouter(App);
