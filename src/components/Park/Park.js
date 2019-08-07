@@ -1,6 +1,8 @@
 import React from "react";
+//import ParkContext from '../../context/ParksContext'
 
 export default class Park extends React.Component {
+
 
   handleRatingSubmit = () => {};
 

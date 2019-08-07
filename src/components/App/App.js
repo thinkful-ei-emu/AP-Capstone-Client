@@ -8,10 +8,9 @@ import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import ParkPage from '../../routes/ParkPage/ParkPage'
 import ParkListPage from '../../routes/ParkListPage/ParkListPage'
 import FavoritesPage from '../../routes/FavoritesPage/FavoritesPage'
-// import PrivateRoute from '../Utils/PrivateRoute'
-// import PublicOnlyRoute from '../Utils/PublicOnlyRoute'
 import TokenService from '../../services/token-service'
 import config from '../../config'
+import ParksContext from '../../context/ParksContext'
 
 
 class App extends React.Component{
@@ -73,22 +72,34 @@ setSearch = search => {
 
   render(){
     return(
+      <ParksContext.Provider
+        value={{
+          parks: this.state.parks,
+          loggedIn: this.state.loggedIn,
+          search: this.state.search,
+          setSearch: this.setSearch,
+          handleLoginSuccess: this.handleLoginSuccess,
+          handleLogoutClick: this.handleLogoutClick,
+          handleSearchSubmit: this.handleSearchSubmit
+        }}
+        >
       <div className="App">
         <header>
-          <Header state = {this.state} handleLogoutClick={this.handleLogoutClick}/>
+          <Header/>
         </header>
         <main>
           <Switch>
-            <Route exact path ={'/'} render={props=> <LandingPage setSearch={this.setSearch} state={this.state} handleSearchSubmit={this.handleSearchSubmit} {...props}/>}/>
-            <Route path={'/login'} render = {props => <LoginPage onLoginSuccess = {this.handleLoginSuccess}/>}/>
+            <Route exact path ={'/'} render={props=> <LandingPage {...props}/>}/>
+            <Route path={'/login'} component={LoginPage}/>
             <Route path ={'/register'} component={RegistrationPage}/>
-            <Route exact path ={'/parks'} render={props=> <ParkListPage parks={this.state.parks}/>}/>
+            <Route exact path ={'/parks'} component={ParkListPage}/>
             <Route path={'/parks/:parkId'} component={ParkPage}/>
             <Route path={'/favorites'} component={FavoritesPage}/>
           </Switch>
         </main>
 
       </div>
+      </ParksContext.Provider>
     )
   }
 }

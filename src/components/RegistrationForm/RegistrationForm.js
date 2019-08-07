@@ -1,7 +1,11 @@
 import React from "react";
 import AuthApiService from "../../services/auth-api-service";
+import ParksContext from '../../context/ParksContext'
 
 export default class RegistrationForm extends React.Component {
+  
+  static contextType = ParksContext
+  
   state = {
     error: null
   };

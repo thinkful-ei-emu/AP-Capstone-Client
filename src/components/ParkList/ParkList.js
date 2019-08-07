@@ -1,14 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ParksContext from '../../context/ParksContext'
 
 export default class ParkList extends React.Component {
 
+  static contextType = ParksContext
+
   render() {
-    console.log(this.props.parks)
-    let results = this.props.parks.map(park=>{
+    console.log(this.context.parks)
+    let results = this.context.parks.map(park=>{
       return(
         <li key={park.id}>
-          <Link to={`/api/parks/${park.id}`}>
+          <Link to={`/parks/${park.id}`}>
           <h3>{park.park_name}</h3>
             </Link>
           <p>{park.park_address}</p>

@@ -1,10 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ParksContext from '../../context/ParksContext'
 
 export default class Header extends React.Component {
 
+  static contextType = ParksContext
+
+
   handleIfLoggedIn = () => {
-    if(this.props.state.loggedIn === true){
+    if(this.context.loggedIn === true){
       return (
         <div>
           <div>
@@ -12,7 +16,7 @@ export default class Header extends React.Component {
           </div>
   
           <div>
-            <Link to="/" onClick={this.props.handleLogoutClick}>
+            <Link to="/" onClick={this.context.handleLogoutClick}>
               Logout
             </Link>
           </div>

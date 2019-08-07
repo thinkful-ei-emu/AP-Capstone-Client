@@ -1,9 +1,11 @@
 import React from 'react'
 import AuthApiService from '../../services/auth-api-service'
 import TokenService from '../../services/token-service';
-
+import ParksContext from '../../context/ParksContext'
 
 export default class LoginForm extends React.Component{
+
+    static contextType = ParksContext
 
     state = {
         error: null
@@ -27,7 +29,7 @@ export default class LoginForm extends React.Component{
                 user_name.value = ''
                 password.value = ''
                 TokenService.saveAuthToken(res.authToken)
-                this.props.onLoginSuccess()
+                this.context.onLoginSuccess()
             })
             .catch(res => {
                 this.setState({
