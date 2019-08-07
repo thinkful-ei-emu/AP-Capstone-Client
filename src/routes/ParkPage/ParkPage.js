@@ -9,7 +9,7 @@ export default class ParkPage extends React.Component{
         return(
             <div>
                 <h2>Park Page</h2>
-                <Park/>
+                <Park {...this.props}/>
             </div>
         )
     }

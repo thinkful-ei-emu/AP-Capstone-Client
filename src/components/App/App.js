@@ -105,7 +105,7 @@ setSearch = search => {
             <Route path={'/login'} component={LoginPage}/>
             <Route path ={'/register'} component={RegistrationPage}/>
             <Route exact path ={'/parks'} component={ParkListPage}/>
-            <Route path={'/parks/:parkId'} component={ParkPage}/>
+            <Route path={'/parks/:parkId'} render={props=> <ParkPage {...props}/>}/>
             <Route path={'/favorites'} component={FavoritesPage}/>
           </Switch>
         </main>

@@ -14,10 +14,10 @@ export default class ParkList extends React.Component {
           <Link to={`/parks/${park.id}`}>
           <h3>{park.park_name}</h3>
             </Link>
-          <p>{park.park_address}</p>
-          <p>{park.park_city}</p>
-          <p>{park.park_hours}</p>
-          <p>{park.park_rating}</p>
+          <p>Address: {park.park_address}</p>
+          <p>Searched City: {park.park_city}</p>
+          <p>Hours: {park.park_hours}</p>
+          <p>Rating: {park.park_rating}</p>
         </li>
       )
     })

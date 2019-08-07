@@ -1,9 +1,10 @@
 import React from "react";
-//import ParkContext from '../../context/ParksContext'
+import ParksContext from "../../context/ParksContext";
 
 export default class Park extends React.Component {
 
-
+  static contextType = ParksContext
+  
   handleRatingSubmit = () => {};
 
   handleAddToFavorites = () => {
@@ -11,14 +12,28 @@ export default class Park extends React.Component {
   }
 
   render() {
+
+    const park = this.context.parks.find(
+      park => `/parks/${park.id}` === this.props.match.url
+    )
+
+    if(!park){
+      return 'Page Not Found'
+    }
+
     return (
       <div>
-        <div>
-          <h3>{this.props.park_name}</h3>
-          <p>{this.props.park_address}</p>
-          <p>{this.props.park_city}</p>
-          <p>{this.props.park_hours}</p>
-          <p>{this.props.park_rating}</p>
+        <div key={park.id}>
+        <button
+            onClick={() => this.props.history.goBack()}
+          >
+            Go Back
+          </button>
+          <h3>{park.park_name}</h3>
+          <p>Address: {park.park_address}</p>
+          <p>Searched City: {park.park_city}</p>
+          <p>Hours: {park.park_hours}</p>
+          <p>Rating: {park.park_rating}</p>
         </div>
 
         <div>
