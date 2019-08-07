@@ -88,7 +88,7 @@ setSearch = search => {
           loggedIn: this.state.loggedIn,
           search: this.state.search,
           setSearch: this.setSearch,
-          handleLoginSuccess: this.handleLoginSuccess,
+          onLoginSuccess: this.handleLoginSuccess,
           handleLogoutClick: this.handleLogoutClick,
           handleSearchSubmit: this.handleSearchSubmit
         }}
