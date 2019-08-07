@@ -13,13 +13,13 @@ import config from '../../config'
 import ParksContext from '../../context/ParksContext'
 import {withRouter} from 'react-router'
 
-
 class App extends React.Component{
 
   state = {
     loggedIn: null,
     parks: [],
     search: '',
+    favorites: []
   }
 
   handleSearchSubmit = e =>{
@@ -82,6 +82,30 @@ setSearch = search => {
   })
 }
 
+getFavorites = () =>{
+
+  fetch(`${config.API_ENDPOINT}/favorites`)
+    .then(res=>{
+      if(res.ok){
+        return res.json()
+      }
+      throw new Error(res.statusText)
+    })
+    .then(resJson =>{
+      this.setState({
+        favorites: resJson
+      })
+    })
+    .catch(error =>{
+      console.log(error)
+    })
+    // .then(()=>{
+    //   const {userId} = this.state.favorites
+    // })
+  }
+
+
+
   render(){
     return(
       <ParksContext.Provider
@@ -92,12 +116,14 @@ setSearch = search => {
           setSearch: this.setSearch,
           onLoginSuccess: this.handleLoginSuccess,
           handleLogoutClick: this.handleLogoutClick,
-          handleSearchSubmit: this.handleSearchSubmit
+          handleSearchSubmit: this.handleSearchSubmit,
+          favorites: this.state.favorites,
+          getFavorites: this.getFavorites
         }}
         >
       <div className="App">
         <header>
-          <Header/>
+          <Header {...this.props}/>
         </header>
         <main>
           <Switch>
@@ -106,7 +132,7 @@ setSearch = search => {
             <Route path ={'/register'} component={RegistrationPage}/>
             <Route exact path ={'/parks'} component={ParkListPage}/>
             <Route path={'/parks/:parkId'} render={props=> <ParkPage {...props}/>}/>
-            <Route path={'/favorites'} component={FavoritesPage}/>
+            <Route path={'/favorites'} render={props=> <FavoritesPage {...props}/>}/>
           </Switch>
         </main>
 

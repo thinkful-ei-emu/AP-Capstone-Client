@@ -8,11 +8,12 @@ export default class Header extends React.Component {
 
 
   handleIfLoggedIn = () => {
+    
     if(this.context.loggedIn === true){
       return (
         <div>
           <div>
-            <Link to="/favorites">Favorites</Link>
+            <Link to={`/favorites`} onClick={this.context.getFavorites}>Favorites</Link>
           </div>
   
           <div>

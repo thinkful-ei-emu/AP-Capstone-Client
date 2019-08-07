@@ -9,7 +9,7 @@ export default class FavoritesPage extends React.Component{
         return(
             <div>
                 <h2>Favorites Page</h2>
-                <Favorites/>
+                <Favorites {...this.props}/>
             </div>
         )
     }
