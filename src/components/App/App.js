@@ -84,24 +84,28 @@ setSearch = search => {
 
 getFavorites = () =>{
 
-  fetch(`${config.API_ENDPOINT}/favorites`)
-    .then(res=>{
-      if(res.ok){
-        return res.json()
-      }
-      throw new Error(res.statusText)
-    })
+  //filter or validate user = user_id, but how. Can use window.token = password, but is that a security risk?
+
+  return fetch(`${config.API_ENDPOINT}/favorites`, {
+    headers: {
+      'authorization': `bearer ${TokenService.getAuthToken()}`,
+    }, 
+  })
+    .then(res =>
+    (!res.ok)
+      ? res.json().then(e => Promise.reject(e))
+      : res.json()
+    )
     .then(resJson =>{
       this.setState({
         favorites: resJson
       })
+      console.log(this.state.favorites)
     })
     .catch(error =>{
       console.log(error)
     })
-    // .then(()=>{
-    //   const {userId} = this.state.favorites
-    // })
+
   }
 
 
