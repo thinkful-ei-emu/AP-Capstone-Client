@@ -135,9 +135,36 @@ getFavorites = () =>{
     })
   }
 
-  handleRemoveFromFavorites = () => {}
+  handleRemoveFromFavorites = (parkId) => {
+    return fetch(`${config.API_ENDPOINT}/favorites`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        park_id: parkId
+      })
+    })
+    .then(res =>{
+      if(res.ok){
+        return res.json()
+      }
+      throw new Error(res.statusText)
+    })
+    .then(() => {
 
+      let filterDeleted = this.state.favorites.filter(favorite=> favorite.id !== parkId)
 
+      this.setState({
+        favorites: filterDeleted
+      })
+      console.log("delete worked")
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+    }
 
   render(){
     return(

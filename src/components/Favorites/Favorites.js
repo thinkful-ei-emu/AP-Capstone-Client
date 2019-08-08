@@ -15,7 +15,7 @@ export default class Favorites extends React.Component {
           <p>Searched City: {favorite.park_city}</p>
           <p>Hours: {favorite.park_hours}</p>
           <p>Rating: {favorite.park_rating}</p>
-          <button type="button" onClick={this.context.handleRemoveFromFavorites}>Remove</button>
+          <button type="button" onClick={() => this.context.handleRemoveFromFavorites(favorite.park_id)}>Remove</button>
         </li>
       )
     })
