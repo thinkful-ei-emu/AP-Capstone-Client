@@ -42,9 +42,7 @@ class App extends React.Component{
                 parks: data,
             },
             ()=>this.props.history.push('parks')
-            )
-            console.log(this.state.parks)
-  
+            )  
         })
         .catch(err=>{
             console.error(err)
@@ -108,6 +106,30 @@ getFavorites = () =>{
 
   }
 
+  handleAddToFavorites = () => {
+    return fetch(`${config.API_ENDPOINT}/favorites`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+      body: JSON.stringify({
+        // user_id,
+        // park_id,
+      })
+    })
+    .then(res =>
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res.json()
+    )
+    .catch(err=>{
+      console.log(err)
+    })
+  }
+
+  handleRemoveFromFavorites = () => {}
+
 
 
   render(){
@@ -122,7 +144,9 @@ getFavorites = () =>{
           handleLogoutClick: this.handleLogoutClick,
           handleSearchSubmit: this.handleSearchSubmit,
           favorites: this.state.favorites,
-          getFavorites: this.getFavorites
+          getFavorites: this.getFavorites,
+          handleAddToFavorites: this.handleAddToFavorites,
+          handleRemoveFromFavorites: this.handleRemoveFromFavorites
         }}
         >
       <div className="App">

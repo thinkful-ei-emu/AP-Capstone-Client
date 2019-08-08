@@ -7,10 +7,6 @@ export default class Park extends React.Component {
   
   handleRatingSubmit = () => {};
 
-  handleAddToFavorites = () => {
-
-  }
-
   render() {
 
     const park = this.context.parks.find(
@@ -54,7 +50,7 @@ export default class Park extends React.Component {
           </form>
 
           <div>
-              <button type="button">Add To Favorites</button>
+              <button type="button" onClick={this.context.handleAddToFavorites}>Add To Favorites</button>
             </div>
 
         </div>
