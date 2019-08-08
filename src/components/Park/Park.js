@@ -50,7 +50,7 @@ export default class Park extends React.Component {
           </form>
 
           <div>
-              <button type="button" onClick={this.context.handleAddToFavorites}>Add To Favorites</button>
+              <button type="button" onClick={() => this.context.handleAddToFavorites(park.id)}>Add To Favorites</button>
             </div>
 
         </div>

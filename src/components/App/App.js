@@ -89,16 +89,17 @@ getFavorites = () =>{
       'authorization': `bearer ${TokenService.getAuthToken()}`,
     }, 
   })
-    .then(res =>
-    (!res.ok)
-      ? res.json().then(e => Promise.reject(e))
-      : res.json()
-    )
+    .then(res =>{
+      if(res.ok){
+        return res.json()
+      }
+      throw new Error(res.statusText)
+    })
     .then(resJson =>{
       this.setState({
         favorites: resJson
       })
-      console.log(this.state.favorites)
+
     })
     .catch(error =>{
       console.log(error)
@@ -106,7 +107,7 @@ getFavorites = () =>{
 
   }
 
-  handleAddToFavorites = () => {
+  handleAddToFavorites = (parkId) => {
     return fetch(`${config.API_ENDPOINT}/favorites`, {
       method: 'POST',
       headers: {
@@ -114,15 +115,21 @@ getFavorites = () =>{
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
-        // user_id,
-        // park_id,
+        park_id: parkId
       })
     })
-    .then(res =>
-      (!res.ok)
-        ? res.json().then(e => Promise.reject(e))
-        : res.json()
-    )
+    .then(res =>{
+      if(res.ok){
+        return res.json()
+      }
+      throw new Error(res.statusText)
+    })
+    .then(resJson => {
+      this.setState({
+        favorites: [...this.state.favorites, resJson]
+      })
+      console.log("post worked")
+    })
     .catch(err=>{
       console.log(err)
     })
