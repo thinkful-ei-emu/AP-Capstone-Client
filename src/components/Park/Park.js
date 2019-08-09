@@ -33,6 +33,7 @@ export default class Park extends React.Component {
         </div>
 
         <div>
+          <h4>Reviews</h4>
           <ul>
             <li>
               <p>Dummy Comment</p>
@@ -52,6 +53,9 @@ export default class Park extends React.Component {
         <div>
           <form>
             <div>
+            <label>Add a Review</label>
+            </div>
+            <div>
               <label>Add a Comment</label>
               <textarea/>
             </div>
@@ -68,7 +72,7 @@ export default class Park extends React.Component {
             </div>
 
             <div>
-              <button type="submit">Submit</button>
+              <button type="submit">Add a Review</button>
             </div>
             
           </form>
