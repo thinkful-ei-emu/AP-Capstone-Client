@@ -145,6 +145,7 @@ getFavorites = () =>{
     .then(res =>{
       if(res.ok){
         this.props.history.push('/')
+        console.log('delete worked')
         return res.json()
       }
       throw new Error(res.statusText)
