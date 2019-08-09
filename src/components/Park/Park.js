@@ -29,29 +29,53 @@ export default class Park extends React.Component {
           <p>Address: {park.park_address}</p>
           <p>Searched City: {park.park_city}</p>
           <p>Hours: {park.park_hours}</p>
-          <p>Rating: {park.park_rating}</p>
+          <p>Average Rating: {park.park_rating}</p>
+        </div>
+
+        <div>
+          <ul>
+            <li>
+              <p>Dummy Comment</p>
+              <p>Dummy Rating</p>
+            </li>
+            <li>
+              <p>Dummy Comment</p>
+              <p>Dummy Rating</p>
+            </li>
+            <li>
+              <p>Dummy Comment</p>
+              <p>Dummy Rating</p>
+            </li>
+          </ul>
         </div>
 
         <div>
           <form>
-            <label>Add a Rating</label>
-            <select>
-              <option value="5">5</option>
-              <option value="4">4</option>
-              <option value="3">3</option>
-              <option value="2">2</option>
-              <option value="1">1</option>
-            </select>
+            <div>
+              <label>Add a Comment</label>
+              <textarea/>
+            </div>
 
             <div>
-              <button type="submit">Add Rating</button>
+              <label>Add a Rating</label>
+              <select>
+                <option value="5">5</option>
+                <option value="4">4</option>
+                <option value="3">3</option>
+                <option value="2">2</option>
+                <option value="1">1</option>
+              </select>
+            </div>
+
+            <div>
+              <button type="submit">Submit</button>
             </div>
             
           </form>
 
           <div>
               <button type="button" onClick={() => this.context.handleAddToFavorites(park.id)}>Add To Favorites</button>
-            </div>
+          </div>
 
         </div>
       </div>
