@@ -23,7 +23,7 @@ export default class Park extends React.Component {
     })
 
     if(!park){
-      return 'Page Not Found'
+      return 'Loading'
     }
 
     return (

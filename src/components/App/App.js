@@ -61,41 +61,46 @@ class App extends React.Component{
 .catch(error=>{
   console.error(error)
 })
+ 
   }
 
   handleSearchSubmit = e =>{
 
     e.preventDefault()
 
-    const url = `${config.API_ENDPOINT}/parks?search=${this.state.search}`
+    console.log(this.state.search)
+
+    this.props.history.push('parks')
+
+    // const url = `${config.API_ENDPOINT}/parks?search=${this.state.search}`
     
 
-    fetch(url)
-        .then(res=>{
-            if(!res.ok){
-                throw new Error(res.statusText)
-            }
-            return res.json()
-        })
-        .then(data=>{
-            console.log(data)
-            this.setState({
-                parks: data,
-            },
-            ()=>this.props.history.push('parks')
-            )  
-        })
-        .catch(err=>{
-            console.error(err)
-        })
-        .then(()=>{
-          this.setState({
-            search: ''
-          })
-        })
-        .catch(err=>{
-          console.error(err)
-      })
+    // fetch(url)
+    //     .then(res=>{
+    //         if(!res.ok){
+    //             throw new Error(res.statusText)
+    //         }
+    //         return res.json()
+    //     })
+    //     .then(data=>{
+    //         console.log(data)
+    //         this.setState({
+    //             parks: data,
+    //         },
+    //         ()=>this.props.history.push('parks')
+    //         )  
+    //     })
+    //     .catch(err=>{
+    //         console.error(err)
+    //     })
+    //     .then(()=>{
+    //       this.setState({
+    //         search: ''
+    //       })
+    //     })
+    //     .catch(err=>{
+    //       console.error(err)
+    //   })
 
 }
 
@@ -122,33 +127,33 @@ setSearch = search => {
   })
 }
 
-getFavorites = () =>{
+// getFavorites = () =>{
 
-  //filter or validate user = user_id, but how. Can use window.token = password, but is that a security risk?
+//   //filter or validate user = user_id, but how. Can use window.token = password, but is that a security risk?
 
-  return fetch(`${config.API_ENDPOINT}/favorites`, {
-    headers: {
-      'authorization': `bearer ${TokenService.getAuthToken()}`,
-    }, 
-  })
-    .then(res =>{
-      if(res.ok){
-        return res.json()
-      }
-      throw new Error(res.statusText)
-    })
-    .then(resJson =>{
-      this.setState({
-        favorites: resJson
-      })
+//   return fetch(`${config.API_ENDPOINT}/favorites`, {
+//     headers: {
+//       'authorization': `bearer ${TokenService.getAuthToken()}`,
+//     }, 
+//   })
+//     .then(res =>{
+//       if(res.ok){
+//         return res.json()
+//       }
+//       throw new Error(res.statusText)
+//     })
+//     .then(resJson =>{
+//       this.setState({
+//         favorites: resJson
+//       })
 
-    })
-    .catch(error =>{
-      console.log(error)
-    })
+//     })
+//     .catch(error =>{
+//       console.log(error)
+//     })
     
 
-  }
+//   }
 
   handleAddToFavorites = (parkId) => {
     return fetch(`${config.API_ENDPOINT}/favorites`, {
@@ -248,6 +253,12 @@ getFavorites = () =>{
       })
     }
 
+    setFavorites = favorites =>{
+      this.setState({
+        favorites,
+      })
+    }
+
   render(){
     return(
       <ParksContext.Provider
@@ -260,7 +271,7 @@ getFavorites = () =>{
           handleLogoutClick: this.handleLogoutClick,
           handleSearchSubmit: this.handleSearchSubmit,
           favorites: this.state.favorites,
-          getFavorites: this.getFavorites,
+          // getFavorites: this.getFavorites,
           handleAddToFavorites: this.handleAddToFavorites,
           handleRemoveFromFavorites: this.handleRemoveFromFavorites,
           reviews: this.state.reviews,
@@ -268,7 +279,8 @@ getFavorites = () =>{
           rating: this.state.rating,
           text: this.state.text,
           setRating: this.state.rating,
-          setText: this.state.text
+          setText: this.state.text,
+          setFavorites: this.setFavorites,
         }}
         >
       <div className="App">

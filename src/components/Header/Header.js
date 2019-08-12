@@ -13,7 +13,7 @@ export default class Header extends React.Component {
       return (
         <div>
           <div>
-            <Link to={`/favorites`} onClick={this.context.getFavorites}>Favorites</Link>
+            <Link to={`/favorites`}>Favorites</Link>
           </div>
   
           <div>

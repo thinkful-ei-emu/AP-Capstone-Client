@@ -1,10 +1,38 @@
 import React from "react";
 import ParksContext from '../../context/ParksContext'
 import {Link} from 'react-router-dom'
+import config from '../../config'
+import TokenService from '../../services/token-service'
 
 export default class Favorites extends React.Component {
   
   static contextType = ParksContext
+
+  componentDidMount(){
+    if(TokenService.hasAuthToken()){
+  fetch(`${config.API_ENDPOINT}/favorites`, {
+    headers: {
+      'authorization': `bearer ${TokenService.getAuthToken()}`,
+    }, 
+  })
+    .then(res =>{
+      if(res.ok){
+        return res.json()
+      }
+      throw new Error(res.statusText)
+    })
+    .then(resJson =>{
+      console.log(resJson)
+      this.context.setFavorites(resJson)
+  
+    })
+    .catch(error =>{
+      console.log(error)
+    })
+
+}
+  }
+
   
 
   render() {
