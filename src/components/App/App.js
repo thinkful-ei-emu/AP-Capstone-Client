@@ -70,37 +70,35 @@ class App extends React.Component{
 
     console.log(this.state.search)
 
-    this.props.history.push('parks')
-
-    // const url = `${config.API_ENDPOINT}/parks?search=${this.state.search}`
+    const url = `${config.API_ENDPOINT}/parks?search=${this.state.search}`
     
 
-    // fetch(url)
-    //     .then(res=>{
-    //         if(!res.ok){
-    //             throw new Error(res.statusText)
-    //         }
-    //         return res.json()
-    //     })
-    //     .then(data=>{
-    //         console.log(data)
-    //         this.setState({
-    //             parks: data,
-    //         },
-    //         ()=>this.props.history.push('parks')
-    //         )  
-    //     })
-    //     .catch(err=>{
-    //         console.error(err)
-    //     })
-    //     .then(()=>{
-    //       this.setState({
-    //         search: ''
-    //       })
-    //     })
-    //     .catch(err=>{
-    //       console.error(err)
-    //   })
+    fetch(url)
+        .then(res=>{
+            if(!res.ok){
+                throw new Error(res.statusText)
+            }
+            return res.json()
+        })
+        .then(data=>{
+            console.log(data)
+            this.setState({
+                parks: data,
+            },
+            ()=>this.props.history.push('parks')
+            )  
+        })
+        .catch(err=>{
+            console.error(err)
+        })
+        .then(()=>{
+          this.setState({
+            search: ''
+          })
+        })
+        .catch(err=>{
+          console.error(err)
+      })
 
 }
 
