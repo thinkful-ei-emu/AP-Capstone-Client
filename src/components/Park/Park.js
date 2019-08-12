@@ -13,6 +13,17 @@ export default class Park extends React.Component {
       park => `/parks/${park.id}` === this.props.match.url
     )
 
+    const filteredReviews = this.context.reviews
+    .filter(review => `/parks/${review.park_id}` === this.props.match.url)
+    .map(review=>{
+      return (
+        <li key={review.id}>
+          <p>{review.text}</p>
+          <p>Rating: {review.rating}</p>
+        </li>
+      )
+    })
+
     if(!park){
       return 'Page Not Found'
     }
@@ -35,18 +46,7 @@ export default class Park extends React.Component {
         <div>
           <h4>Reviews</h4>
           <ul>
-            <li>
-              <p>Dummy Comment</p>
-              <p>Dummy Rating</p>
-            </li>
-            <li>
-              <p>Dummy Comment</p>
-              <p>Dummy Rating</p>
-            </li>
-            <li>
-              <p>Dummy Comment</p>
-              <p>Dummy Rating</p>
-            </li>
+            {filteredReviews}
           </ul>
         </div>
 

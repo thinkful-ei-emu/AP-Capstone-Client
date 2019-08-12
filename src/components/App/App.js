@@ -19,7 +19,8 @@ class App extends React.Component{
     loggedIn: null,
     parks: [],
     search: '',
-    favorites: []
+    favorites: [],
+    reviews: []
   }
 
   handleSearchSubmit = e =>{
@@ -55,6 +56,24 @@ class App extends React.Component{
         .catch(err=>{
           console.error(err)
       })
+
+      fetch(`${config.API_ENDPOINT}/reviews`)
+      .then(res=>{
+        if(!res.ok){
+            throw new Error(res.statusText)
+        }
+        return res.json()
+    })
+    .then(resJson=>{
+      console.log(resJson)
+
+      this.setState({
+        reviews: resJson
+      })
+    })
+    .catch(error=>{
+      console.error(error)
+    })
 }
 
   handleLoginSuccess = () => {
@@ -169,7 +188,8 @@ getFavorites = () =>{
           favorites: this.state.favorites,
           getFavorites: this.getFavorites,
           handleAddToFavorites: this.handleAddToFavorites,
-          handleRemoveFromFavorites: this.handleRemoveFromFavorites
+          handleRemoveFromFavorites: this.handleRemoveFromFavorites,
+          reviews: this.state.reviews
         }}
         >
       <div className="App">
