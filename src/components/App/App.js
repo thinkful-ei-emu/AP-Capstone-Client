@@ -26,6 +26,7 @@ class App extends React.Component{
   }
 
   componentDidMount(){
+    
     fetch(`${config.API_ENDPOINT}/reviews`)
     .then(res=>{
       if(!res.ok){
