@@ -20,7 +20,29 @@ class App extends React.Component{
     parks: [],
     search: '',
     favorites: [],
-    reviews: []
+    reviews: [],
+    rating: 0,
+    text: ''
+  }
+
+  componentDidMount(){
+    fetch(`${config.API_ENDPOINT}/reviews`)
+    .then(res=>{
+      if(!res.ok){
+          throw new Error(res.statusText)
+      }
+      return res.json()
+  })
+  .then(resJson=>{
+    console.log(resJson)
+
+    this.setState({
+      reviews: resJson
+    })
+  })
+  .catch(error=>{
+    console.error(error)
+  })
   }
 
   handleSearchSubmit = e =>{
@@ -57,23 +79,6 @@ class App extends React.Component{
           console.error(err)
       })
 
-      fetch(`${config.API_ENDPOINT}/reviews`)
-      .then(res=>{
-        if(!res.ok){
-            throw new Error(res.statusText)
-        }
-        return res.json()
-    })
-    .then(resJson=>{
-      console.log(resJson)
-
-      this.setState({
-        reviews: resJson
-      })
-    })
-    .catch(error=>{
-      console.error(error)
-    })
 }
 
   handleLoginSuccess = () => {
@@ -123,6 +128,7 @@ getFavorites = () =>{
     .catch(error =>{
       console.log(error)
     })
+    
 
   }
 
@@ -174,6 +180,56 @@ getFavorites = () =>{
     })
     }
 
+    handleAddReview = (e, parkId) =>{
+      e.preventDefault()
+
+      const {text, rating} = e.target
+
+      return fetch(`${config.API_ENDPOINT}/reviews/addReview`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          'authorization': `bearer ${TokenService.getAuthToken()}`,
+        },
+        body: JSON.stringify({
+          park_id: parkId,
+          rating: Number(rating.value),
+          text: text.value,
+        })
+      })
+      .then(res =>{
+        if(res.ok){
+          this.props.history.push('/')
+          console.log('delete worked')
+          return res.json()
+        }
+        throw new Error(res.statusText)
+      })
+      .then(resJson => {
+        this.setState({
+          reviews: [...this.state.reviews, resJson]
+        })
+        console.log("post worked")
+      })
+      .catch(err=>{
+        console.log(err)
+      })
+    }
+
+    setRating = rating =>{
+
+      this.setSearch({
+        rating: rating
+      })
+
+    }
+
+    setText = text =>{
+      this.setState({
+        text: text
+      })
+    }
+
   render(){
     return(
       <ParksContext.Provider
@@ -189,7 +245,12 @@ getFavorites = () =>{
           getFavorites: this.getFavorites,
           handleAddToFavorites: this.handleAddToFavorites,
           handleRemoveFromFavorites: this.handleRemoveFromFavorites,
-          reviews: this.state.reviews
+          reviews: this.state.reviews,
+          handleAddReview: this.handleAddReview,
+          rating: this.state.rating,
+          text: this.state.text,
+          setRating: this.state.rating,
+          setText: this.state.text
         }}
         >
       <div className="App">

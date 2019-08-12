@@ -4,8 +4,6 @@ import ParksContext from "../../context/ParksContext";
 export default class Park extends React.Component {
 
   static contextType = ParksContext
-  
-  handleRatingSubmit = () => {};
 
   render() {
 
@@ -51,18 +49,18 @@ export default class Park extends React.Component {
         </div>
 
         <div>
-          <form>
+          <form onSubmit={() => this.context.handleAddReview(park.id)}>
             <div>
             <label>Add a Review</label>
             </div>
             <div>
               <label>Add a Comment</label>
-              <textarea/>
+              <textarea onChange={() => this.context.setText}></textarea>
             </div>
 
             <div>
               <label>Add a Rating</label>
-              <select>
+              <select onChange={()=>this.context.setRating}>
                 <option value="5">5</option>
                 <option value="4">4</option>
                 <option value="3">3</option>
