@@ -43,6 +43,24 @@ class App extends React.Component{
   .catch(error=>{
     console.error(error)
   })
+
+  fetch(`${config.API_ENDPOINT}/parks`)
+  .then(res=>{
+    if(!res.ok){
+        throw new Error(res.statusText)
+    }
+    return res.json()
+})
+.then(resJson=>{
+  console.log(resJson)
+
+  this.setState({
+    parks: resJson
+  })
+})
+.catch(error=>{
+  console.error(error)
+})
   }
 
   handleSearchSubmit = e =>{
@@ -183,7 +201,7 @@ getFavorites = () =>{
     handleAddReview = (e, parkId) =>{
       e.preventDefault()
 
-      const {text, rating} = e.target
+      const {text, rating} = this.state
 
       return fetch(`${config.API_ENDPOINT}/reviews/addReview`, {
         method: 'POST',
