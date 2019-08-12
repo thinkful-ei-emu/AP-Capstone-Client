@@ -22,7 +22,8 @@ class App extends React.Component{
     favorites: [],
     reviews: [],
     rating: 0,
-    text: ''
+    text: '',
+    park: {}
   }
 
   componentDidMount(){
@@ -125,34 +126,6 @@ setSearch = search => {
     search,
   })
 }
-
-// getFavorites = () =>{
-
-//   //filter or validate user = user_id, but how. Can use window.token = password, but is that a security risk?
-
-//   return fetch(`${config.API_ENDPOINT}/favorites`, {
-//     headers: {
-//       'authorization': `bearer ${TokenService.getAuthToken()}`,
-//     }, 
-//   })
-//     .then(res =>{
-//       if(res.ok){
-//         return res.json()
-//       }
-//       throw new Error(res.statusText)
-//     })
-//     .then(resJson =>{
-//       this.setState({
-//         favorites: resJson
-//       })
-
-//     })
-//     .catch(error =>{
-//       console.log(error)
-//     })
-    
-
-//   }
 
   handleAddToFavorites = (parkId) => {
     return fetch(`${config.API_ENDPOINT}/favorites`, {
@@ -258,6 +231,13 @@ setSearch = search => {
       })
     }
 
+    setPark = park => {
+      this.setState({
+        park,
+      })
+    }
+
+
   render(){
     return(
       <ParksContext.Provider
@@ -270,7 +250,6 @@ setSearch = search => {
           handleLogoutClick: this.handleLogoutClick,
           handleSearchSubmit: this.handleSearchSubmit,
           favorites: this.state.favorites,
-          // getFavorites: this.getFavorites,
           handleAddToFavorites: this.handleAddToFavorites,
           handleRemoveFromFavorites: this.handleRemoveFromFavorites,
           reviews: this.state.reviews,
@@ -280,6 +259,8 @@ setSearch = search => {
           setRating: this.state.rating,
           setText: this.state.text,
           setFavorites: this.setFavorites,
+          setPark: this.setPark,
+          park: this.state.park
         }}
         >
       <div className="App">
