@@ -20,10 +20,17 @@ export default class Park extends React.Component {
         this.context.setPark({
           park: resJson
         });
+
       })
       .catch(error => {
         console.error(error);
       });
+  }
+
+  handleReviewSubmit = e =>{
+    e.preventDefault()
+
+    this.context.handleAddReview(this.context.park.park.id)
   }
 
   render() {
@@ -41,7 +48,7 @@ export default class Park extends React.Component {
       });
 
     if (!park) {
-      return "Park Not Found";
+      return "Loading";
     }
 
     return (
@@ -61,18 +68,18 @@ export default class Park extends React.Component {
         </div>
 
         <div>
-          <form onSubmit={() => this.context.handleAddReview(park.id)}>
+          <form onSubmit={e => this.handleReviewSubmit(e)}>
             <div>
               <label>Add a Review</label>
             </div>
             <div>
               <label>Add a Comment</label>
-              <textarea onChange={() => this.context.setText} />
+              <textarea onChange={e=>this.context.setText(e.target.value)} required/>
             </div>
 
             <div>
               <label>Add a Rating</label>
-              <select onChange={() => this.context.setRating}>
+              <select onChange={e=>this.context.setRating(e.target.value)} required>
                 <option value="5">5</option>
                 <option value="4">4</option>
                 <option value="3">3</option>

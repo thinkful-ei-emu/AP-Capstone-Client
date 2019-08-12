@@ -21,8 +21,8 @@ class App extends React.Component{
     search: '',
     favorites: [],
     reviews: [],
-    rating: 0,
-    text: '',
+    rating: '',
+    text: null,
     park: {}
   }
 
@@ -175,12 +175,14 @@ setSearch = search => {
     })
     }
 
-    handleAddReview = (e, parkId) =>{
-      e.preventDefault()
+    handleAddReview = (parkId) =>{
 
-      const {text, rating} = this.state
+      console.log(this.state.rating)
+      console.log(this.state.text)
+      console.log(parkId)
 
-      return fetch(`${config.API_ENDPOINT}/reviews/addReview`, {
+    
+      return fetch(`${config.API_ENDPOINT}/reviews`, {
         method: 'POST',
         headers: {
           'content-type': 'application/json',
@@ -188,19 +190,18 @@ setSearch = search => {
         },
         body: JSON.stringify({
           park_id: parkId,
-          rating: Number(rating.value),
-          text: text.value,
+          rating: Number(this.state.rating),
+          text: this.state.text,
         })
       })
       .then(res =>{
         if(res.ok){
-          this.props.history.push('/')
-          console.log('delete worked')
           return res.json()
         }
         throw new Error(res.statusText)
       })
       .then(resJson => {
+        this.props.history.goBack()
         this.setState({
           reviews: [...this.state.reviews, resJson]
         })
@@ -213,7 +214,7 @@ setSearch = search => {
 
     setRating = rating =>{
 
-      this.setSearch({
+      this.setState({
         rating: rating
       })
 
@@ -256,8 +257,8 @@ setSearch = search => {
           handleAddReview: this.handleAddReview,
           rating: this.state.rating,
           text: this.state.text,
-          setRating: this.state.rating,
-          setText: this.state.text,
+          setRating: this.setRating,
+          setText: this.setText,
           setFavorites: this.setFavorites,
           setPark: this.setPark,
           park: this.state.park
