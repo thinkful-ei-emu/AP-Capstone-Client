@@ -9,7 +9,16 @@ export default class SearchForm extends React.Component{
         return(
             <form onSubmit={this.context.handleSearchSubmit}>
                 <div>
-                    <input type="text"  placeholder="Virginia Beach" value={this.context.search} onChange={e=>this.context.setSearch(e.target.value)} required/>
+                    <select onChange={e=>this.context.setSearch(e.target.value)}>
+                        <option value="Pick a City">Pick A City</option>
+                        <option value="Virginia Beach">Virginia Beach</option>
+                        <option value="Norfolk">Norfolk</option>
+                        <option value="Chesapeake">Chesapeake</option>
+                        <option value="Suffolk">Suffolk</option>
+                        <option value="Hampton">Hampton</option>
+                        <option value="Newport News">Newport News</option>
+
+                    </select>
                 </div>
 
                 <div>
