@@ -15,7 +15,6 @@ import { withRouter } from "react-router";
 
 class App extends React.Component {
   state = {
-    loggedIn: null,
     parks: [],
     search: "",
     favorites: [],
@@ -100,18 +99,12 @@ class App extends React.Component {
   };
 
   handleLoginSuccess = () => {
-    this.setState({
-      loggedIn: true
-    });
 
     this.props.history.goBack();
   };
 
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
-    this.setState({
-      loggedIn: false
-    });
   };
 
   setSearch = search => {
@@ -251,7 +244,6 @@ class App extends React.Component {
       <ParksContext.Provider
         value={{
           parks: this.state.parks,
-          loggedIn: this.state.loggedIn,
           search: this.state.search,
           setSearch: this.setSearch,
           onLoginSuccess: this.handleLoginSuccess,
