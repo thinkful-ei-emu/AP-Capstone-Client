@@ -17,7 +17,7 @@ export default class ParkList extends React.Component {
           <p>Address: {park.park_address}</p>
           <p>Searched City: {park.park_city}</p>
           <p>Hours: {park.park_hours}</p>
-          <p>Average Rating: {park.park_rating}</p>
+          <p>Average Rating: {Number(park.park_rating).toFixed(2)}</p>
         </li>
       )
     })

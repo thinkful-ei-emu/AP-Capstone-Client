@@ -59,7 +59,7 @@ export default class Park extends React.Component {
           <p>Address: {park.park_address}</p>
           <p>Searched City: {park.park_city}</p>
           <p>Hours: {park.park_hours}</p>
-          <p>Average Rating: {park.park_rating}</p>
+          <p>Average Rating: {Number(park.park_rating).toFixed(2)}</p>
         </div>
 
         <div>
@@ -80,6 +80,7 @@ export default class Park extends React.Component {
             <div>
               <label>Add a Rating</label>
               <select onChange={e=>this.context.setRating(e.target.value)} required>
+                <option value="Select A Rating">Select A Rating</option>
                 <option value="5">5</option>
                 <option value="4">4</option>
                 <option value="3">3</option>
