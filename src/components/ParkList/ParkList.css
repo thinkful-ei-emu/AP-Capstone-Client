@@ -1,0 +1,37 @@
+ul{
+    list-style-type: none;
+}
+
+h3{
+    font-family: 'Chewy', cursive;
+}
+
+.Park a{
+    text-decoration: none;
+}
+
+.Park a:visited, a:link{
+    color: white;
+}
+
+.Park{
+    border: 1px solid black;
+    text-align: center;
+    margin-bottom: 15px;
+    border-radius: 15px 50px;
+    width: auto;
+    font-size: 18px;
+    background: #FF6633;
+    color: white;
+    padding: 25px;
+}
+
+.Park p{
+    text-align: center;
+    margin: 10px;
+}
+
+.Results-list{
+    margin: 15px;
+    padding: 0;
+}

@@ -1,5 +1,6 @@
 import React from 'react'
 import ParksContext from '../../context/ParksContext'
+import './SearchForm.css'
 
 export default class SearchForm extends React.Component{
 
@@ -7,10 +8,11 @@ export default class SearchForm extends React.Component{
 
     render(){
         return(
-            <form onSubmit={this.context.handleSearchSubmit}>
+        <div className='SearchForm-container'>
+            <form onSubmit={this.context.handleSearchSubmit} className='SearchForm'>
                 <div>
-                    <select onChange={e=>this.context.setSearch(e.target.value)}>
-                        <option value="Pick a City">Pick A City</option>
+                    <select onChange={e=>this.context.setSearch(e.target.value)} className='dropdown'>
+                        <option value="Pick a City">All Parks</option>
                         <option value="Virginia Beach">Virginia Beach</option>
                         <option value="Norfolk">Norfolk</option>
                         <option value="Chesapeake">Chesapeake</option>
@@ -21,10 +23,11 @@ export default class SearchForm extends React.Component{
                     </select>
                 </div>
 
-                <div>
-                    <button type="submit">Search by City</button>
+                <div className='button-container'>
+                    <button type="submit" className='search-button'>Search by City</button>
                 </div>
             </form>
+        </div>
         )
     }
 }

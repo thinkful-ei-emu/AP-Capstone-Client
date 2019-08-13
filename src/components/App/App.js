@@ -39,8 +39,8 @@ class App extends React.Component {
           reviews: resJson
         });
       })
-      .catch(error => {
-        console.error(error);
+      .catch(err => {
+        console.error(err.error);
       });
 
     fetch(`${config.API_ENDPOINT}/parks`)
@@ -57,8 +57,8 @@ class App extends React.Component {
           parks: resJson
         });
       })
-      .catch(error => {
-        console.error(error);
+      .catch(err => {
+        console.error(err.error);
       });
   }
 
@@ -86,7 +86,7 @@ class App extends React.Component {
         );
       })
       .catch(err => {
-        console.error(err);
+        console.error(err.error);
       })
       .then(() => {
         this.setState({
@@ -94,7 +94,7 @@ class App extends React.Component {
         });
       })
       .catch(err => {
-        console.error(err);
+        console.error(err.error);
       });
   };
 
@@ -114,6 +114,10 @@ class App extends React.Component {
   };
 
   handleAddToFavorites = parkId => {
+    if(!TokenService.hasAuthToken()){
+      this.props.history.push('/login')
+    }
+
     return fetch(`${config.API_ENDPOINT}/favorites`, {
       method: "POST",
       headers: {
@@ -137,7 +141,7 @@ class App extends React.Component {
         console.log("post worked");
       })
       .catch(err => {
-        console.log(err);
+        console.error(err.error);
       });
   };
 
@@ -157,7 +161,7 @@ class App extends React.Component {
         throw new Error(res.statusText);
       })
       .catch(err => {
-        console.log(err);
+        console.error(err.error);
       });
   };
 
@@ -165,6 +169,10 @@ class App extends React.Component {
     console.log(this.state.rating);
     console.log(this.state.text);
     console.log(parkId);
+
+    if(!TokenService.hasAuthToken()){
+      this.props.history.push('/login')
+    }
 
     return fetch(`${config.API_ENDPOINT}/reviews`, {
       method: "POST",
@@ -206,12 +214,12 @@ class App extends React.Component {
               reviews: resJson
             });
           })
-          .catch(error => {
-            console.error(error);
+          .catch(err => {
+            console.error(err.error);
           });
       })
       .catch(err => {
-        console.error(err);
+        console.error(err.error);
       });
   };
 
@@ -264,10 +272,10 @@ class App extends React.Component {
         }}
       >
         <div className="App">
-          <header>
+          <header className="App_header">
             <Header {...this.props} />
           </header>
-          <main>
+          <main className="App_main">
             <Switch>
               <Route
                 exact

@@ -1,0 +1,14 @@
+.Remove-Button{
+    background: white;
+    color: #FF6633;
+    border-radius: 8px;
+    border: 1px solid black;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.Results-List{
+    padding: 0;
+    margin-right: 15px;
+    margin-left: 15px;
+}

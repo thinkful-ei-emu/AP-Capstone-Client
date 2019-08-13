@@ -8,7 +8,7 @@ export default class FavoritesPage extends React.Component{
     render(){
         return(
             <div>
-                <h2>Favorites Page</h2>
+                <h2 className='Favorites-Title'>My Favorite Parks</h2>
                 <Favorites {...this.props}/>
             </div>
         )

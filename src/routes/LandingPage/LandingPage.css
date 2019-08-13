@@ -1,0 +1,18 @@
+.Landing-Page{
+    text-align: center;
+}
+
+h2{
+    text-align: center;
+    margin: 5%;
+    font-family: 'Chewy', cursive;
+}
+
+p{
+    text-align: justify;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: 'Chewy', cursive;
+    margin-bottom: 40px;
+    font-size: 18px;
+}

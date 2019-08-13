@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import ParksContext from '../../context/ParksContext'
 import TokenService from "../../services/token-service";
+import './Header.css'
 
 export default class Header extends React.Component {
 
@@ -11,29 +12,22 @@ export default class Header extends React.Component {
   handleIfLoggedIn = () => {
     if(TokenService.hasAuthToken()){
       return (
-        <div>
-          <div>
+        <div className='Header_logged-in'>
+          
             <Link to={`/favorites`}>Favorites</Link>
-          </div>
-  
-          <div>
+        
             <Link to="/" onClick={this.context.handleLogoutClick}>
               Logout
             </Link>
-          </div>
+        
         </div>
       )
     }
     else{
       return (
-        <div>
-          <div>
+        <div className='Header_not-logged-in'>
             <Link to="/register">Register</Link>
-          </div>
-  
-          <div>
             <Link to="/Login">Login</Link>
-          </div>
         </div>
       );
     }
@@ -42,9 +36,9 @@ export default class Header extends React.Component {
 
   render() {
     return (
-      <nav>
-        <h1>
-          <Link to="/">Release Me Human!</Link>
+      <nav className='Header'>
+        <h1 className='Title'>
+          <Link to="/">RMH!</Link>
         </h1>
         {this.handleIfLoggedIn()}
       </nav>

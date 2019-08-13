@@ -1,6 +1,7 @@
 import React from "react";
 import AuthApiService from "../../services/auth-api-service";
 import ParksContext from '../../context/ParksContext'
+import './RegistrationForm.css'
 
 export default class RegistrationForm extends React.Component {
   
@@ -45,22 +46,22 @@ export default class RegistrationForm extends React.Component {
         <div role="alert">{error && <p className="red">{error}</p>}</div>
 
         <div className='full_name'>
-          <label htmlFor='registration-form-full_name'>Full Name</label>
+          <label htmlFor='registration-form-full_name'>Full Name: </label>
           <input name="full_name" type="text" required />
         </div>
 
-        <div>
-          <label htmlFor='registration-form-user_name'>Username</label>
+        <div className='user_name'>
+          <label htmlFor='registration-form-user_name'>Username: </label>
           <input name="user_name" type="text" required />
         </div>
 
-        <div>
-          <label htmlFor='registration-form-password'>Password</label>
+        <div className='password'>
+          <label htmlFor='registration-form-password'>Password: </label>
           <input name="password" type="password" required />
         </div>
 
         <div>
-          <button type="submit">Register</button>
+          <button type="submit" className='Register-Button'>Register</button>
         </div>
       </form>
     );

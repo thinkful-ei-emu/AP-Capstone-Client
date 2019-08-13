@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import ParksContext from '../../context/ParksContext'
+import './ParkList.css'
 
 export default class ParkList extends React.Component {
 
@@ -10,12 +11,12 @@ export default class ParkList extends React.Component {
 
     let results = this.context.parks.map(park=>{
       return(
-        <li key={park.id}>
+        <li key={park.id} className='Park'>
           <Link to={`/parks/${park.id}`}>
-          <h3>{park.park_name}</h3>
+          <h3 className='Park-Name'>{park.park_name}</h3>
             </Link>
           <p>Address: {park.park_address}</p>
-          <p>Searched City: {park.park_city}</p>
+          <p>City: {park.park_city}</p>
           <p>Hours: {park.park_hours}</p>
           <p>Average Rating: {Number(park.park_rating).toFixed(2)}</p>
         </li>
@@ -23,8 +24,8 @@ export default class ParkList extends React.Component {
     })
     
     return (
-      <div>
-        <ul>
+      <div className='Results-container'>
+        <ul className='Results-list'>
           {results}
         </ul>
       </div>
