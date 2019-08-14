@@ -5,13 +5,14 @@
     border: 1px solid white;
     font-size: 16px;
     position: fixed;
+    margin-top: -30px;
 }
 
 .Single-Park{
     text-align: center;
     border: 1px solid black;
     text-align: center;
-    margin-top: 25px;
+    margin-top: 50px;
     margin-bottom: 15px;
     border-radius: 15px 50px;
     width: auto;

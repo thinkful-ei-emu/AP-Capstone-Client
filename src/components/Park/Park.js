@@ -26,6 +26,7 @@ export default class Park extends React.Component {
       .catch(err => {
         console.error(err.error);
       });
+
   }
 
   handleReviewSubmit = e =>{

@@ -40,5 +40,10 @@
     margin-right: 10px;
     font-family: 'Chewy', cursive;
   }
+
+  .pic{
+    max-width: 100px;
+    margin-top: -25px;
+  }
   
  

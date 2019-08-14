@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ParksContext from '../../context/ParksContext'
 import TokenService from "../../services/token-service";
 import './Header.css'
+import pic from '../../images/cute-cartoon-dog-face-vector-14275452.jpg'
 
 export default class Header extends React.Component {
 
@@ -38,7 +39,9 @@ export default class Header extends React.Component {
     return (
       <nav className='Header'>
         <h1 className='Title'>
-          <Link to="/">RMH!</Link>
+          <Link to="/">
+            <img className='pic' src={pic} alt='logo'></img>
+          </Link>
         </h1>
         {this.handleIfLoggedIn()}
       </nav>
