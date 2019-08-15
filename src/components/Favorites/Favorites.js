@@ -6,6 +6,8 @@ import TokenService from "../../services/token-service";
 import './Favorites.css'
 
 export default class Favorites extends React.Component {
+
+
   static contextType = ParksContext;
 
   componentDidMount() {
