@@ -117,6 +117,8 @@ class App extends React.Component {
     if(!TokenService.hasAuthToken()){
       this.props.history.push('/login')
     }
+    
+    else{
 
     return fetch(`${config.API_ENDPOINT}/favorites`, {
       method: "POST",
@@ -143,6 +145,7 @@ class App extends React.Component {
       .catch(err => {
         console.error(err.error);
       });
+    }
   };
 
   handleRemoveFromFavorites = parkId => {
@@ -173,6 +176,8 @@ class App extends React.Component {
     if(!TokenService.hasAuthToken()){
       this.props.history.push('/login')
     }
+
+    else{
 
     return fetch(`${config.API_ENDPOINT}/reviews`, {
       method: "POST",
@@ -221,6 +226,7 @@ class App extends React.Component {
       .catch(err => {
         console.error(err.error);
       });
+    }
   };
 
   setRating = rating => {
