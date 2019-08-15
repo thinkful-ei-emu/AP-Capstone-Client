@@ -31,9 +31,6 @@ export default class Favorites extends React.Component {
           console.log(error);
         });
     }
-    else{
-      this.props.history.push('/login')
-    }
   }
 
   render() {
@@ -65,7 +62,9 @@ export default class Favorites extends React.Component {
         <div>
           <button className="Go-Back" onClick={() => this.props.history.goBack()}>Go Back</button>
         </div>
-        <ul className='Results-List'>{results}</ul>
+        <ul className='Results-List'>
+          {results}
+        </ul>
       </div>
     );
   }
