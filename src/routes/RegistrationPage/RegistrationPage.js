@@ -16,7 +16,7 @@ export default class RegistrationPage extends React.Component{
     render(){
         return(
             <div>
-                <h2 className='Registration-Title'>Registration Page</h2>
+                <h2 className='Registration-Title'>Register</h2>
                 <RegistrationForm onRegistrationSuccess = {this.handleRegistrationSuccess}/>
             </div>
         )

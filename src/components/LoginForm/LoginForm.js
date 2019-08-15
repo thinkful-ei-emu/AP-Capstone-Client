@@ -40,10 +40,15 @@ export default class LoginForm extends React.Component{
 
     }
 
-    render(){        
+    render(){
+        const {error} = this.state 
+
         return(
             <div className='LoginForm-Container'>
                 <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
+                <div role='alert' className="Error-container">
+                    {error && <p className='Error-Text'>{error}</p>}
+                </div>
                     <div className='Username-Container'>
                         <label htmlFor="LoginForm-Username">Username: </label>
                         <input type="text" name="user_name" id="LoginForm-user_name" required/>

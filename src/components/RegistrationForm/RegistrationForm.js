@@ -43,7 +43,7 @@ export default class RegistrationForm extends React.Component {
 
     return (
       <form className='registration-form' onSubmit={this.handleSubmit}>
-        <div role="alert">{error && <p className="red">{error}</p>}</div>
+        <div role="alert" className='Error-Container'>{error && <p className='Error-Text'>{error}</p>}</div>
 
         <div className='full_name'>
           <label htmlFor='registration-form-full_name'>Full Name: </label>
