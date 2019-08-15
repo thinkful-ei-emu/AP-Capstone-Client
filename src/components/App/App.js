@@ -14,6 +14,7 @@ import ParksContext from "../../context/ParksContext";
 import { withRouter } from "react-router";
 
 class App extends React.Component {
+
   state = {
     parks: [],
     search: "",
