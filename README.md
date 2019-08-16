@@ -6,7 +6,7 @@ This app is designed to help users find off-leash/no-leash specific dog parks in
 
 ## Stack
 
-This is a fullstack app designed using React, CSS, Node, Express, and PostgreSQL.
+This is a fullstack app designed using React, CSS, Node, Express, PostgreSQL, and Mocha.
 
 ## Link to Live App:
 
@@ -22,6 +22,8 @@ Password: 11AaBbCc!
 This app utilizes the following API:
 
 https://blooming-reef-25668.herokuapp.com/
+
+Repo for above: https://github.com/thinkful-ei-emu/AP-Capstone-Server
 
 ## Screenshots:
 
