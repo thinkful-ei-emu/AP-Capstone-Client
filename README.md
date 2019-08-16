@@ -25,15 +25,11 @@ https://blooming-reef-25668.herokuapp.com/
 
 ## Screenshots:
 
-![Screenshot of Landing Page]
-(https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/landing-page-screenshot.jpg)
+![Screenshot of Landing Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/landing-page-screenshot.jpg)
 
-![Screenshot of Search Results]
-(https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/results-page-screenshot.jpg)
+![Screenshot of Search Results](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/results-page-screenshot.jpg)
 
-![Screenshot of Single Park Page]
-(https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/single-park-screenshot.jpg)
+![Screenshot of Single Park Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/single-park-screenshot.jpg)
 
-![Screenshot of Favorites Page]
-(https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/favorites-page.jpg)
+![Screenshot of Favorites Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/favorites-page.jpg)
  
