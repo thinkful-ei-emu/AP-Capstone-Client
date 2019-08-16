@@ -24,7 +24,7 @@ export default class SearchForm extends React.Component{
                 </div>
 
                 <div className='button-container'>
-                    <button type="submit" className='search-button'>Search by City</button>
+                    <button type="submit" className='search-button'>Search</button>
                 </div>
             </form>
         </div>

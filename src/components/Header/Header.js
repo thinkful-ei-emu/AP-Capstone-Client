@@ -15,7 +15,7 @@ export default class Header extends React.Component {
       return (
         <div className='Header_logged-in'>
           
-            <Link to={`/favorites`}>Favorites</Link>
+            <Link to='/favorites'>Favorites</Link>
         
             <Link to="/" onClick={this.context.handleLogoutClick}>
               Logout

@@ -16,7 +16,6 @@ export default class Park extends React.Component {
         return res.json();
       })
       .then(resJson => {
-        console.log(resJson);
 
         this.context.setPark({
           park: resJson

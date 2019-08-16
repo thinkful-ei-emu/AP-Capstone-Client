@@ -24,11 +24,10 @@ export default class Favorites extends React.Component {
           throw new Error(res.statusText);
         })
         .then(resJson => {
-          console.log(resJson);
           this.context.setFavorites(resJson);
         })
         .catch(error => {
-          console.log(error);
+          console.error(error.error);
         });
     }
   }
@@ -62,9 +61,11 @@ export default class Favorites extends React.Component {
         <div>
           <button className="Go-Back" onClick={() => this.props.history.goBack()}>Go Back</button>
         </div>
-        <ul className='Results-List'>
-          {results}
-        </ul>
+        <div>
+          <ul className='Results-List'>
+            {results}
+          </ul>
+        </div>
       </div>
     );
   }

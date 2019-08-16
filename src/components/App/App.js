@@ -34,8 +34,6 @@ class App extends React.Component {
         return res.json();
       })
       .then(resJson => {
-        console.log(resJson);
-
         this.setState({
           reviews: resJson
         });
@@ -52,8 +50,6 @@ class App extends React.Component {
         return res.json();
       })
       .then(resJson => {
-        console.log(resJson);
-
         this.setState({
           parks: resJson
         });
@@ -66,8 +62,6 @@ class App extends React.Component {
   handleSearchSubmit = e => {
     e.preventDefault();
 
-    console.log(this.state.search);
-
     const url = `${config.API_ENDPOINT}/parks?search=${this.state.search}`;
 
     fetch(url)
@@ -78,7 +72,6 @@ class App extends React.Component {
         return res.json();
       })
       .then(data => {
-        console.log(data);
         this.setState(
           {
             parks: data
@@ -141,7 +134,6 @@ class App extends React.Component {
         this.setState({
           favorites: [...this.state.favorites, resJson]
         });
-        console.log("post worked");
       })
       .catch(err => {
         console.error(err.error);
@@ -159,7 +151,6 @@ class App extends React.Component {
       .then(res => {
         if (res.ok) {
           this.props.history.push("/");
-          console.log("delete worked");
           return res.json();
         }
         throw new Error(res.statusText);
@@ -170,9 +161,6 @@ class App extends React.Component {
   };
 
   handleAddReview = parkId => {
-    console.log(this.state.rating);
-    console.log(this.state.text);
-    console.log(parkId);
 
     if(!TokenService.hasAuthToken()){
       this.props.history.push('/login')
@@ -203,7 +191,6 @@ class App extends React.Component {
         this.setState({
           reviews: [...this.state.reviews, resJson]
         });
-        console.log("post worked");
       })
       .then(() => {
         fetch(`${config.API_ENDPOINT}/reviews`)
@@ -214,8 +201,6 @@ class App extends React.Component {
             return res.json();
           })
           .then(resJson => {
-            console.log(resJson);
-
             this.setState({
               reviews: resJson
             });
