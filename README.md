@@ -6,7 +6,7 @@ This app is designed to help users find off-leash/no-leash specific dog parks in
 
 ## Stack
 
-This is a fullstack app designed using React, CSS, Node, Express, and PostgreSQL.
+This is a fullstack app designed using React, CSS, Node, Express, PostgreSQL, and Mocha.
 
 ## Link to Live App:
 
@@ -23,17 +23,19 @@ This app utilizes the following API:
 
 https://blooming-reef-25668.herokuapp.com/
 
+Repo for above: https://github.com/thinkful-ei-emu/AP-Capstone-Server
+
 ## Screenshots:
 
-![Screenshot of Landing Page]
-(https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/landing-page-screenshot.jpg)
+#### Landing Page:
+![Screenshot of Landing Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/landing-page-screenshot.jpg)
 
-![Screenshot of Search Results]
-(https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/results-page-screenshot.jpg)
+#### Search Results:
+![Screenshot of Search Results](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/results-page-screenshot.jpg)
 
-![Screenshot of Single Park Page]
-(https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/single-park-screenshot.jpg)
+#### Single Park Page:
+![Screenshot of Single Park Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/single-park-screenshot.jpg)
 
-![Screenshot of Favorites Page]
-(https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/favorites-page.jpg)
+#### Favorites Page:
+![Screenshot of Favorites Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/favorites-page.jpg)
  
