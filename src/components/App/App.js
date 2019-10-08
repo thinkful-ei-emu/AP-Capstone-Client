@@ -1,61 +1,41 @@
-import React from "react";
-import "./App.css";
-import Header from "../Header/Header";
-import { Route, Switch } from "react-router-dom";
-import LandingPage from "../../routes/LandingPage/LandingPage";
-import LoginPage from "../../routes/LoginPage/LoginPage";
-import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
-import ParkPage from "../../routes/ParkPage/ParkPage";
-import ParkListPage from "../../routes/ParkListPage/ParkListPage";
-import FavoritesPage from "../../routes/FavoritesPage/FavoritesPage";
-import TokenService from "../../services/token-service";
-import config from "../../config";
-import ParksContext from "../../context/ParksContext";
-import { withRouter } from "react-router";
+import React from 'react';
+import './App.css';
+import Header from '../Header/Header';
+import { Route, Switch } from 'react-router-dom';
+import LandingPage from '../../routes/LandingPage/LandingPage';
+import LoginPage from '../../routes/LoginPage/LoginPage';
+import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage';
+import ParkPage from '../../routes/ParkPage/ParkPage';
+import ParkListPage from '../../routes/ParkListPage/ParkListPage';
+import FavoritesPage from '../../routes/FavoritesPage/FavoritesPage';
+import TokenService from '../../services/token-service';
+import config from '../../config';
+import ParksContext from '../../context/ParksContext';
+import { withRouter } from 'react-router';
+import ReviewsApiService from '../../services/reviews-api-service'
+
 
 class App extends React.Component {
 
   state = {
     parks: [],
-    search: "",
+    search: '',
     favorites: [],
     reviews: [],
-    rating: "",
+    rating: '',
     text: null,
     park: {}
   };
 
   componentDidMount() {
-    fetch(`${config.API_ENDPOINT}/reviews`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
+    ReviewsApiService.getAllReviews()
       .then(resJson => {
         this.setState({
           reviews: resJson
         });
       })
       .catch(err => {
-        console.error(err.error);
-      });
-
-    fetch(`${config.API_ENDPOINT}/parks`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then(resJson => {
-        this.setState({
-          parks: resJson
-        });
-      })
-      .catch(err => {
-        console.error(err.error);
+        console.log(err);
       });
   }
 
@@ -76,7 +56,7 @@ class App extends React.Component {
           {
             parks: data
           },
-          () => this.props.history.push("parks")
+          () => this.props.history.push('parks')
         );
       })
       .catch(err => {
@@ -84,7 +64,7 @@ class App extends React.Component {
       })
       .then(() => {
         this.setState({
-          search: ""
+          search: ''
         });
       })
       .catch(err => {
@@ -109,48 +89,48 @@ class App extends React.Component {
 
   handleAddToFavorites = parkId => {
     if(!TokenService.hasAuthToken()){
-      this.props.history.push('/login')
+      this.props.history.push('/login');
     }
     
     else{
 
-    return fetch(`${config.API_ENDPOINT}/favorites`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${TokenService.getAuthToken()}`
-      },
-      body: JSON.stringify({
-        park_id: parkId
+      return fetch(`${config.API_ENDPOINT}/favorites`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `bearer ${TokenService.getAuthToken()}`
+        },
+        body: JSON.stringify({
+          park_id: parkId
+        })
       })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error(res.statusText);
-      })
-      .then(resJson => {
-        this.setState({
-          favorites: [...this.state.favorites, resJson]
+        .then(res => {
+          if (res.ok) {
+            return res.json();
+          }
+          throw new Error(res.statusText);
+        })
+        .then(resJson => {
+          this.setState({
+            favorites: [...this.state.favorites, resJson]
+          });
+        })
+        .catch(err => {
+          console.error(err.error);
         });
-      })
-      .catch(err => {
-        console.error(err.error);
-      });
     }
   };
 
   handleRemoveFromFavorites = parkId => {
     return fetch(`${config.API_ENDPOINT}/favorites/${parkId}`, {
-      method: "DELETE",
+      method: 'DELETE',
       headers: {
         authorization: `bearer ${TokenService.getAuthToken()}`
       }
     })
       .then(res => {
         if (res.ok) {
-          this.props.history.push("/");
+          this.props.history.push('/');
           return res.json();
         }
         throw new Error(res.statusText);
@@ -163,55 +143,55 @@ class App extends React.Component {
   handleAddReview = parkId => {
 
     if(!TokenService.hasAuthToken()){
-      this.props.history.push('/login')
+      this.props.history.push('/login');
     }
 
     else{
 
-    return fetch(`${config.API_ENDPOINT}/reviews`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        authorization: `bearer ${TokenService.getAuthToken()}`
-      },
-      body: JSON.stringify({
-        park_id: parkId,
-        rating: Number(this.state.rating),
-        text: this.state.text
+      return fetch(`${config.API_ENDPOINT}/reviews`, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json',
+          authorization: `bearer ${TokenService.getAuthToken()}`
+        },
+        body: JSON.stringify({
+          park_id: parkId,
+          rating: Number(this.state.rating),
+          text: this.state.text
+        })
       })
-    })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error(res.statusText);
-      })
-      .then(resJson => {
-        // this.props.history.goBack()
-        this.setState({
-          reviews: [...this.state.reviews, resJson]
-        });
-      })
-      .then(() => {
-        fetch(`${config.API_ENDPOINT}/reviews`)
-          .then(res => {
-            if (!res.ok) {
-              throw new Error(res.statusText);
-            }
+        .then(res => {
+          if (res.ok) {
             return res.json();
-          })
-          .then(resJson => {
-            this.setState({
-              reviews: resJson
-            });
-          })
-          .catch(err => {
-            console.error(err.error);
+          }
+          throw new Error(res.statusText);
+        })
+        .then(resJson => {
+        // this.props.history.goBack()
+          this.setState({
+            reviews: [...this.state.reviews, resJson]
           });
-      })
-      .catch(err => {
-        console.error(err.error);
-      });
+        })
+        .then(() => {
+          fetch(`${config.API_ENDPOINT}/reviews`)
+            .then(res => {
+              if (!res.ok) {
+                throw new Error(res.statusText);
+              }
+              return res.json();
+            })
+            .then(resJson => {
+              this.setState({
+                reviews: resJson
+              });
+            })
+            .catch(err => {
+              console.error(err.error);
+            });
+        })
+        .catch(err => {
+          console.error(err.error);
+        });
     }
   };
 
@@ -271,18 +251,18 @@ class App extends React.Component {
             <Switch>
               <Route
                 exact
-                path={"/"}
+                path={'/'}
                 render={props => <LandingPage {...props} />}
               />
-              <Route path={"/login"} component={LoginPage} />
-              <Route path={"/register"} component={RegistrationPage} />
-              <Route exact path={"/parks"} component={ParkListPage} />
+              <Route path={'/login'} component={LoginPage} />
+              <Route path={'/register'} component={RegistrationPage} />
+              <Route exact path={'/parks'} component={ParkListPage} />
               <Route
-                path={"/parks/:parkId"}
+                path={'/parks/:parkId'}
                 render={props => <ParkPage {...props} />}
               />
               <Route
-                path={"/favorites"}
+                path={'/favorites'}
                 render={props => <FavoritesPage {...props} />}
               />
             </Switch>
