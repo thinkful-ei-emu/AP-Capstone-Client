@@ -37,6 +37,16 @@ it('renders without crashing', () => {
       date_created: new Date('2029-01-22T16:28:32.615Z').toLocaleDateString(),
     },
   ];
+
+  let favorites = [
+    {
+      id: 1,
+      park_name: 'Bayville Farms Park',
+      park_city: 'Virginia Beach',
+      park_address: '4132 First Court Road',
+      park_hours: 'Please Consult for Hours: https://www.vbgov.com/government/departments/parks-recreation/parks-trails/city-parks/Documents/park-closing-times.pdf'
+    }
+  ];
     
 
   const div = document.createElement('div');
@@ -45,6 +55,7 @@ it('renders without crashing', () => {
       value={{
         park,
         reviews,
+        favorites
       }}>
       <MemoryRouter>
         <Park match={match}/>
