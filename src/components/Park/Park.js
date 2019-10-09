@@ -1,41 +1,86 @@
-import React from "react";
-import ParksContext from "../../context/ParksContext";
-import config from "../../config";
-import './Park.css'
+import React from 'react';
+import ParksContext from '../../context/ParksContext';
+// import config from '../../config';
+import './Park.css';
+import ParksApiService from '../../services/parks-api-service';
+import FavoritesApiService from '../../services/favorites-api-service';
+import ReviewsApiService from '../../services/reviews-api-service';
 
 export default class Park extends React.Component {
   static contextType = ParksContext;
 
+  state = {
+    error: null,
+    message: '',
+  }
+
   componentDidMount() {
     const { parkId } = this.props.match.params;
-    fetch(`${config.API_ENDPOINT}/parks/${parkId}`)
-      .then(res => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
+    ParksApiService.getParkById(parkId)
       .then(resJson => {
-
-        this.context.setPark({
-          park: resJson
-        });
-
+        this.context.setPark(resJson);
       })
-      .catch(err => {
-        console.error(err.error);
+      .catch(res => {
+        this.setState({
+          error: res.error
+        });
       });
 
+    ReviewsApiService.getAllReviews()
+      .then(resJson => {
+        this.context.setReviews(resJson);
+      })
+      .catch(res => {
+        this.setState({
+          error: res.error
+        });
+      });
   }
+  
+  handleAddToFavorites = park_id => {
+    if(this.context.loggedIn === false){
+      this.props.history.push('/login');
+    }
+    else{
+      FavoritesApiService.addNewFavorite(park_id)
+        .then(() => {
+          this.setState({message: `You have added ${this.context.park.park_name} to your favorites`});
+        })
+        .catch(res => this.setState({ error: res.error }));
+    }
+  };
 
-  handleReviewSubmit = e =>{
-    e.preventDefault()
+  handleAddReview = (e) => {
 
-    this.context.handleAddReview(this.context.park.park.id)
-  }
+    e.preventDefault();
+    
+    if(this.context.loggedIn === false){
+      this.props.history.push('/login');
+    }
+    else{
+      let park_id = this.context.park.id;
+      let rating = Number(this.context.rating);
+      let text = this.context.text;
+
+      let newReview = {
+        park_id,
+        rating,
+        text,
+      };
+
+      ReviewsApiService.addNewReview(newReview)
+        .then(resJson => {
+        // this.props.history.goBack()
+          this.context.setReviews([...this.context.reviews, resJson]);
+        })
+        .catch(res => this.setState({error: res.error}));
+    }
+  };
 
   render() {
-    const { park } = this.context.park;
+    const { park } = this.context;
+    const { error, message } = this.state;
+    console.log(error, message);
 
     const filteredReviews = this.context.reviews
       .filter(review => `/parks/${review.park_id}` === this.props.match.url)
@@ -43,7 +88,7 @@ export default class Park extends React.Component {
         return (
           <li key={review.id} className='Single-Review'>
             <p>{review.text}
-            <br></br>
+              <br></br>
             Rating: {review.rating}
             </p>
             
@@ -52,13 +97,13 @@ export default class Park extends React.Component {
       });
 
     if (!park) {
-      return "Loading";
+      return 'Loading';
     }
 
     return (
       <div>
         <div>
-        <button className='Go-Back' type='button' onClick={() => this.props.history.goBack()}>Go Back</button>
+          <button className='Go-Back' type='button' onClick={() => this.props.history.goBack()}>Go Back</button>
         </div>
         <div className='Single-Park'>
           <h3>{park.park_name}</h3>
@@ -69,14 +114,14 @@ export default class Park extends React.Component {
         </div>
 
         <div className='Add-To-Favorites-Button'>
-            <button
-              type="button"
-              className='Add-To-Favorites'
-              onClick={() => this.context.handleAddToFavorites(park.id)}
-            >
+          <button
+            type="button"
+            className='Add-To-Favorites'
+            onClick={() => this.handleAddToFavorites(park.id)}
+          >
               Add To Favorites
-            </button>
-          </div>
+          </button>
+        </div>
 
         <div className='Reviews-Container'>
           <h2 className='Reviews-Title'>Reviews</h2>
@@ -84,28 +129,28 @@ export default class Park extends React.Component {
         </div>
 
         <div className='Add-A-Review-Form-Container'>
-          <form onSubmit={e => this.handleReviewSubmit(e)} className='Add-A-Review-Form'>
+          <form onSubmit={(e) => this.handleAddReview(e)} className='Add-A-Review-Form'>
             <div className='Add-A-Review-Label'>
               <label htmlFor='Add-A-Review-Form'>Add a Review</label>
             </div>
             <div className='Add-A-Comment-Label'>
               <label htmlFor='Add-A-Review-Form'>Add a Comment: </label>
               <div className='textarea-container'>
-              <textarea className='textarea' onChange={e=>this.context.setText(e.target.value)} required/>
+                <textarea className='textarea' onChange={e=>this.context.setText(e.target.value)} required/>
               </div>
             </div>
 
             <div className='Add-A-Rating-Label'>
               <label htmlFor='Add-A-Review-Form'>Add a Rating: </label>
               <div className='select-container'>
-              <select onChange={e=>this.context.setRating(e.target.value)} required>
-                <option value="Select A Rating">Select A Rating</option>
-                <option value="5">5</option>
-                <option value="4">4</option>
-                <option value="3">3</option>
-                <option value="2">2</option>
-                <option value="1">1</option>
-              </select>
+                <select onChange={e=>this.context.setRating(e.target.value)} required>
+                  <option value="Select A Rating">Select A Rating</option>
+                  <option value="5">5</option>
+                  <option value="4">4</option>
+                  <option value="3">3</option>
+                  <option value="2">2</option>
+                  <option value="1">1</option>
+                </select>
               </div>
             </div>
 

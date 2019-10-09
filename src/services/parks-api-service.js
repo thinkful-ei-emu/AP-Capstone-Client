@@ -3,8 +3,8 @@ import TokenService from './token-service';
 
 
 const ParksApiService = {
-  getParks() {
-    return fetch(`${config.API_ENDPOINT}/parks`, {
+  getParks(searchTerm) {
+    return fetch(`${config.API_ENDPOINT}/parks?search=${searchTerm}`, {
       headers: {
         Authorization: `bearer ${TokenService.getAuthToken()}`
       }
@@ -25,4 +25,4 @@ const ParksApiService = {
 
 };
 
-export default ParkApiService;
+export default ParksApiService;

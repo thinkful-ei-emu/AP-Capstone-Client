@@ -1,28 +1,23 @@
-import React from "react";
-import ParksContext from "../../context/ParksContext";
-import { Link } from "react-router-dom";
-import config from "../../config";
-import TokenService from "../../services/token-service";
-import './Favorites.css'
+import React from 'react';
+import ParksContext from '../../context/ParksContext';
+import { Link } from 'react-router-dom';
+import TokenService from '../../services/token-service';
+import './Favorites.css';
+import FavoritesApiService from '../../services/favorites-api-service';
 
 export default class Favorites extends React.Component {
 
 
   static contextType = ParksContext;
+  
+  state = {
+    error: null,
+    message: ''
+  }
 
   componentDidMount() {
     if (TokenService.hasAuthToken()) {
-      fetch(`${config.API_ENDPOINT}/favorites`, {
-        headers: {
-          authorization: `bearer ${TokenService.getAuthToken()}`
-        }
-      })
-        .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw new Error(res.statusText);
-        })
+      FavoritesApiService.getUserFavorites()
         .then(resJson => {
           this.context.setFavorites(resJson);
         })
@@ -32,10 +27,19 @@ export default class Favorites extends React.Component {
     }
   }
 
+  handleRemoveFromFavorites = park_id => {    
+    return FavoritesApiService.deleteFavorite(park_id)
+      .catch(res => (res.error) ? this.setState({ error: res.error }) : this.props.history.push('/'));
+
+  };
+
   render() {
-    let results = this.context.favorites.map(favorite => {
+    const { error, message } = this.state;
+    console.log(error, message);
+    
+    let results = this.context.favorites.map((favorite, i) => {
       return (
-        <li key={favorite.park_id} className='Park'>
+        <li key={i} className='Park'>
           <Link to={`/parks/${favorite.park_id}`}>
             <h3 className='Park-Name'>{favorite.park_name}</h3>
           </Link>
@@ -47,7 +51,7 @@ export default class Favorites extends React.Component {
             type="button"
             className='Remove-Button'
             onClick={() =>
-              this.context.handleRemoveFromFavorites(favorite.park_id)
+              this.handleRemoveFromFavorites(favorite.park_id)
             }
           >
             Remove
@@ -55,6 +59,7 @@ export default class Favorites extends React.Component {
         </li>
       );
     });
+
 
     return (
       <div>

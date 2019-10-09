@@ -1,34 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import ParksContext from '../../context/ParksContext'
-import TokenService from "../../services/token-service";
-import './Header.css'
-import pic from '../../images/cute-cartoon-dog-face-vector-14275452.jpg'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import ParksContext from '../../context/ParksContext';
+import TokenService from '../../services/token-service';
+import './Header.css';
+import pic from '../../images/cute-cartoon-dog-face-vector-14275452.jpg';
 
 export default class Header extends React.Component {
 
   static contextType = ParksContext
 
+  handleLogoutClick = () => {
+    TokenService.clearAuthToken();
+    this.context.setLoggedIn(false);
+  };
+
 
   handleIfLoggedIn = () => {
-    if(TokenService.hasAuthToken()){
+    if(this.context.loggedIn){
       return (
         <div className='Header_logged-in'>
           
-            <Link to='/favorites'>Favorites</Link>
+          <Link to='/favorites'>Favorites</Link>
         
-            <Link to="/" onClick={this.context.handleLogoutClick}>
+          <Link to="/" onClick={this.handleLogoutClick}>
               Logout
-            </Link>
+          </Link>
         
         </div>
-      )
+      );
     }
     else{
       return (
         <div className='Header_not-logged-in'>
-            <Link to="/register">Register</Link>
-            <Link to="/Login">Login</Link>
+          <Link to="/register">Register</Link>
+          <Link to="/Login">Login</Link>
         </div>
       );
     }
