@@ -12,7 +12,7 @@
     margin-left: auto;
     height: 20%;
     padding: 15px;
-    font-family: 'Chewy', cursive;
+    font-family: 'Paytone One', sans-serif;
 }
 
 input{
@@ -24,7 +24,7 @@ input{
 }
 
 .Register-Button{
-    font-family: 'Chewy', cursive;
+    font-family: 'Paytone One', sans-serif;
     margin-top: 10px;
     background: white;
     color: #FF6633;

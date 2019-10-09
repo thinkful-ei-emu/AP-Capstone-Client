@@ -1,7 +1,7 @@
 .Username-Container, .Password-Container{
     text-align: center;
     padding: 15px;
-    font-family: 'Chewy', cursive;
+    font-family: 'Paytone One', sans-serif;
 }
 
 .Login-Button-Container{
@@ -10,7 +10,7 @@
 
 
 .Login-Button-Container button{
-    font-family: 'Chewy', cursive;
+    font-family: 'Paytone One', sans-serif;
     margin-bottom: 10px;
     background: white;
     color: #FF6633;

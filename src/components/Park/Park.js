@@ -6,7 +6,7 @@ import ParksApiService from '../../services/parks-api-service';
 import FavoritesApiService from '../../services/favorites-api-service';
 import ReviewsApiService from '../../services/reviews-api-service';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClock, faStarHalfAlt, faStreetView, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
+import { faClock, faStarHalfAlt, faStreetView, faCity, faPencilAlt, faHeart} from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -137,9 +137,9 @@ export default class Park extends React.Component {
           <button className='Go-Back' type='button' onClick={() => this.props.history.goBack()}>Go Back</button>
         </div>
         <div className='Single-Park'>
-          <h3>{park.park_name}</h3>
+          <h3 className='Park-Name-Container'>{park.park_name}</h3>
           <p><FontAwesomeIcon icon={faStreetView}/> : {park.park_address}</p>
-          <p>{park.park_city}</p>
+          <p><FontAwesomeIcon icon={faCity}/> : {park.park_city}</p>
           <p><FontAwesomeIcon icon={faClock}/> : {park.park_hours}</p>
           <p><FontAwesomeIcon icon={faStarHalfAlt}/> : {Number(park.park_rating).toFixed(2)}</p>
         </div>
@@ -149,7 +149,7 @@ export default class Park extends React.Component {
 
         <div className='Add-To-Favorites-Button'>
           {favorites.includes(park.id) || this.state.favorited === true 
-            ? <> <p className='Favorited'>Favorited</p> 
+            ? <> <p className='Favorited'> <FontAwesomeIcon icon={faHeart}/> Favorited <FontAwesomeIcon icon={faHeart}/></p> 
           </>
             : 
             <button
@@ -194,7 +194,7 @@ export default class Park extends React.Component {
             </div>
 
             <div className='Add-A-Review-Button'>
-              <button type="submit" className='Add-A-Review'>Add a Review</button>
+              <button type="submit" className='Add-A-Review'>  <FontAwesomeIcon icon={faPencilAlt}/> Add a Review</button>
             </div>
           </form>
         </div>

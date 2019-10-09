@@ -18,12 +18,12 @@ div.SearchForm-container{
      width: 200px; 
      text-align-last: center; 
      margin-bottom: 5px;
-     font-family: 'Chewy', cursive;
+     font-family: 'Paytone One', sans-serif;
     }
 
 .search-button{
     background: #FF6633;
-    font-family: 'Chewy', cursive;
+    font-family: 'Paytone One', sans-serif;
     border-radius: 15px;
     font-size: 14px;
     border: 1px solid white;
