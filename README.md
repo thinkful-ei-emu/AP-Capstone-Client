@@ -28,14 +28,14 @@ Repo for above: https://github.com/thinkful-ei-emu/AP-Capstone-Server
 ## Screenshots:
 
 #### Landing Page:
-![Screenshot of Landing Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/landing-page-screenshot.jpg)
+![Screenshot of Landing Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/updated-landing-page.jpg)
 
 #### Search Results:
-![Screenshot of Search Results](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/results-page-screenshot.jpg)
+![Screenshot of Search Results](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/updated-search-results.jpg)
 
 #### Single Park Page:
-![Screenshot of Single Park Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/single-park-screenshot.jpg)
+![Screenshot of Single Park Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/updated-single-park-page.jpg)
 
 #### Favorites Page:
-![Screenshot of Favorites Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/favorites-page.jpg)
+![Screenshot of Favorites Page](https://github.com/thinkful-ei-emu/AP-Capstone-Client/blob/master/src/images/updated-favorites.jpg)
  
