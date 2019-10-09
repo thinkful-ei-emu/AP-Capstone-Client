@@ -1,7 +1,7 @@
-import React from "react";
-import AuthApiService from "../../services/auth-api-service";
-import ParksContext from '../../context/ParksContext'
-import './RegistrationForm.css'
+import React from 'react';
+import AuthApiService from '../../services/auth-api-service';
+import ParksContext from '../../context/ParksContext';
+import './RegistrationForm.css';
 
 export default class RegistrationForm extends React.Component {
   
@@ -26,9 +26,9 @@ export default class RegistrationForm extends React.Component {
       full_name: full_name.value
     })
       .then(user => {
-        user_name.value = "";
-        password.value = "";
-        full_name.value = "";
+        user_name.value = '';
+        password.value = '';
+        full_name.value = '';
         this.props.onRegistrationSuccess();
       })
       .catch(res => {
