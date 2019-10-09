@@ -59,7 +59,6 @@ export default class Park extends React.Component {
       FavoritesApiService.addNewFavorite(park_id)
         .then(() => {
           this.setState({
-            message: `You have added ${this.context.park.park_name} to your favorites`,
             favorited: true,
           });
         })
@@ -71,7 +70,7 @@ export default class Park extends React.Component {
 
     e.preventDefault();
     
-    if(this.context.loggedIn === false){
+    if(this.context.loggedIn === null){
       this.props.history.push('/login');
     }
     else{
@@ -170,14 +169,14 @@ export default class Park extends React.Component {
               <label htmlFor='Add-A-Review-Form'>Add a Review</label>
             </div>
             <div className='Add-A-Comment-Label'>
-              <label htmlFor='Add-A-Review-Form'>Add a Comment: </label>
+              <label htmlFor='Add-A-Review-Form'></label>
               <div className='textarea-container'>
                 <textarea className='textarea' onChange={e=>this.context.setText(e.target.value)} required/>
               </div>
             </div>
 
             <div className='Add-A-Rating-Label'>
-              <label htmlFor='Add-A-Review-Form'>Add a Rating: </label>
+              <label htmlFor='Add-A-Review-Form'></label>
               <div className='select-container'>
                 <select onChange={e=>this.context.setRating(e.target.value)} required>
                   <option value="Select A Rating">Select A Rating</option>
