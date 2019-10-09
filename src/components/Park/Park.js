@@ -5,6 +5,10 @@ import './Park.css';
 import ParksApiService from '../../services/parks-api-service';
 import FavoritesApiService from '../../services/favorites-api-service';
 import ReviewsApiService from '../../services/reviews-api-service';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClock, faStarHalfAlt, faStreetView, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
+
+
 
 export default class Park extends React.Component {
   static contextType = ParksContext;
@@ -112,7 +116,7 @@ export default class Park extends React.Component {
           <li key={review.id} className='Single-Review'>
             <p>{review.text}
               <br></br>
-            Rating: {review.rating}
+              <FontAwesomeIcon icon={faStarHalfAlt}/> : {review.rating}
             </p>
             
           </li>
@@ -134,10 +138,10 @@ export default class Park extends React.Component {
         </div>
         <div className='Single-Park'>
           <h3>{park.park_name}</h3>
-          <p>Address: {park.park_address}</p>
-          <p>City: {park.park_city}</p>
-          <p>Hours: {park.park_hours}</p>
-          <p>Average Rating: {Number(park.park_rating).toFixed(2)}</p>
+          <p><FontAwesomeIcon icon={faStreetView}/> : {park.park_address}</p>
+          <p>{park.park_city}</p>
+          <p><FontAwesomeIcon icon={faClock}/> : {park.park_hours}</p>
+          <p><FontAwesomeIcon icon={faStarHalfAlt}/> : {Number(park.park_rating).toFixed(2)}</p>
         </div>
 
         {message && <div className='messageBox'>{message}<button className='messageButton' aria-label='close' onClick={() => this.handleMessageClose()}>X</button></div>}
