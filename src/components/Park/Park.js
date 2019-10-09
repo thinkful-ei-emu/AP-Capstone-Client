@@ -12,6 +12,7 @@ export default class Park extends React.Component {
   state = {
     error: null,
     message: '',
+    favorited: null,
   }
 
   componentDidMount() {
@@ -35,16 +36,32 @@ export default class Park extends React.Component {
           error: res.error
         });
       });
+
+    if(this.context.loggedIn){
+      FavoritesApiService.getUserFavorites()
+        .then(resJson => {
+          this.context.setFavorites(resJson);
+        })
+        .catch(res => {
+          this.setState({
+            error: res.error
+          });
+        });
+    }
+    
   }
   
   handleAddToFavorites = park_id => {
-    if(this.context.loggedIn === false){
+    if(this.context.loggedIn === null){
       this.props.history.push('/login');
     }
     else{
       FavoritesApiService.addNewFavorite(park_id)
         .then(() => {
-          this.setState({message: `You have added ${this.context.park.park_name} to your favorites`});
+          this.setState({
+            message: `You have added ${this.context.park.park_name} to your favorites`,
+            favorited: true,
+          });
         })
         .catch(res => this.setState({ error: res.error }));
     }
@@ -77,10 +94,17 @@ export default class Park extends React.Component {
     }
   };
 
+  handleErrorClose = () => {
+    this.setState({ error: null });
+  };
+
+  handleMessageClose = () => {
+    this.setState({ message: null });
+  };
+
   render() {
     const { park } = this.context;
     const { error, message } = this.state;
-    console.log(error, message);
 
     const filteredReviews = this.context.reviews
       .filter(review => `/parks/${review.park_id}` === this.props.match.url)
@@ -95,6 +119,10 @@ export default class Park extends React.Component {
           </li>
         );
       });
+
+    let favorites = this.context.favorites.map(favorite => {
+      return favorite.park_id;
+    });
 
     if (!park) {
       return 'Loading';
@@ -113,14 +141,22 @@ export default class Park extends React.Component {
           <p>Average Rating: {Number(park.park_rating).toFixed(2)}</p>
         </div>
 
+        {message && <div className='messageBox'>{message}<button className='messageButton' aria-label='close' onClick={() => this.handleMessageClose()}>X</button></div>}
+        {error && <div className='errorBox'>{error}<button className='errorButton' aria-label='close' onClick={() => this.handleErrorClose()}>X</button></div>}
+
         <div className='Add-To-Favorites-Button'>
-          <button
-            type="button"
-            className='Add-To-Favorites'
-            onClick={() => this.handleAddToFavorites(park.id)}
-          >
+          {favorites.includes(park.id) || this.state.favorited === true 
+            ? <> <p className='Favorited'>Favorited</p> 
+          </>
+            : 
+            <button
+              type="button"
+              className='Add-To-Favorites'
+              onClick={() => this.handleAddToFavorites(park.id)}
+            >
               Add To Favorites
-          </button>
+            </button>
+          }
         </div>
 
         <div className='Reviews-Container'>

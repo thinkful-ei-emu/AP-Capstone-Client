@@ -33,9 +33,17 @@ export default class Favorites extends React.Component {
 
   };
 
+  handleErrorClose = () => {
+    this.setState({ error: null });
+  };
+
+  handleMessageClose = () => {
+    this.setState({ message: null });
+   
+  };
+
   render() {
     const { error, message } = this.state;
-    console.log(error, message);
     
     let results = this.context.favorites.map((favorite, i) => {
       return (
@@ -67,6 +75,8 @@ export default class Favorites extends React.Component {
           <button className="Go-Back" onClick={() => this.props.history.goBack()}>Go Back</button>
         </div>
         <div>
+          {message && <div className='messageBox'>{message}<button className='messageButton' aria-label='close' onClick={() => this.handleMessageClose()}>X</button></div>}
+          {error && <div className='errorBox'>{error}<button className='errorButton' aria-label='close' onClick={() => this.handleErrorClose()}>X</button></div>}
           <ul className='Results-List'>
             {results}
           </ul>
